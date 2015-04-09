@@ -7,7 +7,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.clustering.KMeans
 
-object kMeansClustering {
+object KMeansClustering {
 
   def main(args: Array[String]) {
 
