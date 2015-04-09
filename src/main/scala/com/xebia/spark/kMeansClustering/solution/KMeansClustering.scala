@@ -1,8 +1,8 @@
 package com.xebia.spark.kMeansClustering.solution
 
 import com.xebia.spark.kMeansClustering.solution.features.Engineering.featureEngineering
-import com.xebia.spark.kMeansClustering.solution.tools.Utilities
 import com.xebia.spark.kMeansClustering.solution.tools.Utilities.extractHeader
+import com.xebia.spark.kMeansClustering.solution.tools.Utilities._
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.clustering.KMeans
@@ -24,14 +24,15 @@ object KMeansClustering {
 
     val model = KMeans.train(featuredData, 2, 5)
 
-    val metrics = Utilities.getMetrics(model, featuredData, labels)
 
-    val accuracy = if(metrics.precision > 0.5) 1d - metrics.precision else metrics.precision
-    val confusion = metrics.confusionMatrix
+    // Evaluation
+    val (accuracy, confusion) = getMetrics(model, featuredData, labels)
 
     // Print results
     println(s"Confusion Matrix: \n $confusion")
     println(s"Error: $accuracy")
+
+
 
 
 
