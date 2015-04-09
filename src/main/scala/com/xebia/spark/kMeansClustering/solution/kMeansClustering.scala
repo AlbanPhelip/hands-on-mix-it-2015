@@ -1,6 +1,7 @@
 package com.xebia.spark.kMeansClustering.solution
 
 import com.xebia.spark.kMeansClustering.solution.features.Engineering.featureEngineering
+import com.xebia.spark.kMeansClustering.solution.tools.Utilities
 import com.xebia.spark.kMeansClustering.solution.tools.Utilities.extractHeader
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
@@ -19,19 +20,20 @@ object kMeansClustering {
 
     val cleanData = featureEngineering(data)
 
-    val Array(train, test) = cleanData.randomSplit(Array(0.6, 0.4))
+    val featuredData = cleanData.map(_._1)
+    val labels = cleanData.map(_._2)
 
-    val model = KMeans.train(train.map(_._1), 2, 10)
+    val model = KMeans.train(featuredData, 2, 5)
 
-    val prediction = model.predict(test.map(_._1))
+    val metrics = Utilities.getMetrics(model, featuredData, labels)
 
-    val pred = test.map(l => (model.predict(l._1).toDouble, l._2))
+    val accuracy = if(metrics.precision > 0.5) 1d - metrics.precision else metrics.precision
+    val confusion = metrics.confusionMatrix
 
+    // Print results
+    println(s"Confusion Matrix: \n $confusion")
+    println(s"Error: $accuracy")
 
-    val matrix = new MulticlassMetrics(pred)
-
-    println(matrix.confusionMatrix.toString())
-    println(prediction.sum())
 
 
   }
