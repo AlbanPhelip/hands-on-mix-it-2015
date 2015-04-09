@@ -1,12 +1,9 @@
 package com.xebia.spark.kMeansClustering.solution.tools
 
-import org.apache.spark.mllib.classification.NaiveBayesModel
 import org.apache.spark.mllib.clustering.KMeansModel
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
-import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
-import org.apache.spark.mllib.linalg.{Vectors, Vector}
-
+import org.apache.spark.mllib.linalg.Vector
 
 
 object Utilities {

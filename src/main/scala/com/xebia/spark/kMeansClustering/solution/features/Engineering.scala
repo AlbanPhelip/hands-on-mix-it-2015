@@ -1,7 +1,6 @@
 package com.xebia.spark.kMeansClustering.solution.features
 
 import org.apache.spark.mllib.linalg.{Vectors, Vector}
-import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
 
 
@@ -14,10 +13,10 @@ object Engineering {
       val values = line.split('§')
       val label = values(1).toDouble
 
-      val numericalData = Array(values(0), values(4), values(5), values(6), values(8)).map(l => l match {
+      val numericalData = Array(values(0), values(4), values(5), values(6), values(8)).map {
         case "NA" => 0d
-        case _ => l.toDouble
-      })
+        case l => l.toDouble
+      }
 
      (Vectors.dense(numericalData), label)
     })

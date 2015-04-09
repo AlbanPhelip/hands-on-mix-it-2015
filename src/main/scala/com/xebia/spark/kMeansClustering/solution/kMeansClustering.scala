@@ -6,7 +6,6 @@ import com.xebia.spark.kMeansClustering.solution.tools.Utilities.extractHeader
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.clustering.KMeans
-import org.apache.spark.mllib.evaluation.MulticlassMetrics
 
 object kMeansClustering {
 
