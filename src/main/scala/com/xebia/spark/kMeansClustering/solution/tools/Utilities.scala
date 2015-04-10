@@ -31,6 +31,12 @@ object Utilities {
   }
 
 
+  /**
+   *
+   * @param model A KMeansModel from the method Kmeans.train()
+   * @param data the data (a RDD[LabeledPoint])
+   * @return A tuple giving the accuracy and the confusion matrix
+   */
   def getMetrics(model: KMeansModel, data: RDD[LabeledPoint]): (Double, Matrix) = {
 
     val predictionsAndLabels = data.map(l => (model.predict(l.features).toDouble, l.label))

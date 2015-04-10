@@ -2,6 +2,7 @@ package com.xebia.spark.kMeansClustering.stubs.tools
 
 import org.apache.spark.mllib.clustering.KMeansModel
 import org.apache.spark.mllib.evaluation.MulticlassMetrics
+import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
 import org.apache.spark.mllib.linalg.{Matrix, Vector}
 
@@ -32,14 +33,14 @@ object Utilities {
 
   /**
    *
-   * @param model A KMeansModel from the methos Kmeans.train()
-   * @param data the data (a RDD[Vector])
-   * @param labels The labels (a RDD[Double])
+   * @param model A KMeansModel from the method Kmeans.train()
+   * @param data the data (a RDD[LabeledPoint])
    * @return A tuple giving the accuracy and the confusion matrix
    */
-  def getMetrics(model: KMeansModel, data: RDD[Vector], labels: RDD[Double]): (Double, Matrix) = {
+  def getMetrics(model: KMeansModel, data: RDD[LabeledPoint]): (Double, Matrix) = {
 
-    val predictionsAndLabels = data.zip(labels).map(l => (model.predict(l._1).toDouble, l._2))
+    val predictionsAndLabels = data.map(l => (model.predict(l.features).toDouble, l.label))
+
     val metrics: MulticlassMetrics = new MulticlassMetrics(predictionsAndLabels)
 
     val accuracy = if(metrics.precision > 0.5) 1d - metrics.precision else metrics.precision

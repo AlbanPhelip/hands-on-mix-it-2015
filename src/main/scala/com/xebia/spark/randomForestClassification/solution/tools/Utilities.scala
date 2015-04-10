@@ -32,14 +32,14 @@ object Utilities {
 
   /**
    *
-   * @param model A KMeansModel from the methos Kmeans.train()
-   * @param data the data (a RDD[Vector])
-   * @param labels The labels (a RDD[Double])
+   * @param model A RandomForestModel from the method RandomForest.trainClassifier()
+   * @param data the data (a RDD[LabeledPoint])
    * @return A tuple giving the accuracy and the confusion matrix
    */
-  def getMetrics(model: RandomForestModel, data: RDD[Vector], labels: RDD[Double]): (Double, Matrix) = {
+  def getMetrics(model: RandomForestModel, data: RDD[LabeledPoint]): (Double, Matrix) = {
 
-    val predictionsAndLabels = data.zip(labels).map(l => (model.predict(l._1), l._2))
+    val predictionsAndLabels = data.map(l => (model.predict(l.features), l.label))
+
     val metrics: MulticlassMetrics = new MulticlassMetrics(predictionsAndLabels)
 
     val accuracy = if(metrics.precision > 0.5) 1d - metrics.precision else metrics.precision

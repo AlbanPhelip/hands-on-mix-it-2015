@@ -1,6 +1,6 @@
 package com.xebia.spark.randomForestClassification.solution.modelling
 
-import com.xebia.spark.randomForestClassification.solution.tools.Utilities.getRMSE
+import com.xebia.spark.randomForestClassification.solution.tools.Utilities.getMetrics
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.RandomForest
 import org.apache.spark.mllib.tree.model.RandomForestModel
@@ -43,39 +43,39 @@ object RandomForestObject {
    * @param maxBinsGrid: The maximum number of leaves for each tree
    * @return The best parameters found, in a tuple.
    */
-//  def gridSearchRandomForestClassifier(trainSet: RDD[LabeledPoint],
-//                                       valSet: RDD[LabeledPoint],
-//                                       categoricalFeaturesInfo: Map[Int, Int] = Map[Int, Int](),
-//                                       numTreesGrid: Array[Int] = Array(10),
-//                                       featuresSubsetStrategy: String = "auto",
-//                                       impurity: String = "variance",
-//                                       maxDepthGrid: Array[Int] = Array(2),
-//                                       maxBinsGrid: Array[Int] = Array(4)) = {
-//
-//    val gridSearch =
-//
-//      for (numTrees <- numTreesGrid;
-//           maxDepth <- maxDepthGrid;
-//           maxBins <- maxBinsGrid)
-//        yield {
-//
-//
-//
-//          val model = RandomForest.trainClassifier(trainSet, 2, categoricalFeaturesInfo,
-//            numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
-//
-//          val accuracyVal = getMetrics(model, valSet)
-//
-//          ((numTrees, maxDepth, maxBins), rmseVal)
-//        }
-//
-//    val params = gridSearch.sortBy(_._2).take(1)(0)._1
-//    val numTrees = params._1
-//    val maxDepth = params._2
-//    val maxBins = params._3
-//
-//    (categoricalFeaturesInfo, numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
-//  }
+  def gridSearchRandomForestClassifier(trainSet: RDD[LabeledPoint],
+                                       valSet: RDD[LabeledPoint],
+                                       categoricalFeaturesInfo: Map[Int, Int] = Map[Int, Int](),
+                                       numTreesGrid: Array[Int] = Array(10),
+                                       featuresSubsetStrategy: String = "auto",
+                                       impurity: String = "variance",
+                                       maxDepthGrid: Array[Int] = Array(2),
+                                       maxBinsGrid: Array[Int] = Array(4)) = {
+
+    val gridSearch =
+
+      for (numTrees <- numTreesGrid;
+           maxDepth <- maxDepthGrid;
+           maxBins <- maxBinsGrid)
+        yield {
+
+
+
+          val model = RandomForest.trainClassifier(trainSet, 2, categoricalFeaturesInfo,
+            numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
+
+          val accuracyVal = getMetrics(model, valSet)
+
+          ((numTrees, maxDepth, maxBins), accuracyVal)
+        }
+
+    val params = gridSearch.sortBy(_._2).reverse(0)._1
+    val numTrees = params._1
+    val maxDepth = params._2
+    val maxBins = params._3
+
+    (categoricalFeaturesInfo, numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
+  }
 
 
 }
