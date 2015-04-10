@@ -17,8 +17,8 @@ object Engineering {
 
       val pClass = values(0).toDouble
       val sex = values(3) match {
-        case "\"male\"" => 1d
-        case "\"female\"" => 2d
+        case "\"male\"" => 0d
+        case "\"female\"" => 1d
       }
       val age = values(4) match {
         case "NA" => 28d
@@ -37,9 +37,9 @@ object Engineering {
         case "\"S\"" => 3d
       }
 
-      val cleandedData = Array(pClass, sex, age, sibsp, parch, fair, embarked)
+      val cleanedData = Array(pClass, sex, age, sibsp, parch, fair, embarked)
 
-      LabeledPoint(label, Vectors.dense(cleandedData))
+      LabeledPoint(label, Vectors.dense(cleanedData))
     })
 
   }
