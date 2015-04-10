@@ -6,7 +6,7 @@ import com.xebia.spark.randomForestClassification.solution.tools.Utilities._
 import org.apache.spark.{SparkContext, SparkConf}
 
 
-object RandomForestRegression {
+object RandomForestClassification {
 
   def main(args: Array[String]) {
 
