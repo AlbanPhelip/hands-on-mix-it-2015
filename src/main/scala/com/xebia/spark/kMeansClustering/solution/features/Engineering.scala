@@ -13,10 +13,20 @@ object Engineering {
       val values = line.split('§')
       val label = values(1).toDouble
 
-      val numericalData = Array(values(0), values(4), values(5), values(6), values(8)).map {
-        case "NA" => 0d
-        case l => l.toDouble
-      }
+     val pClass = values(0).toDouble
+
+     val age = values(4) match {
+       case "NA" => 28d
+       case l => l.toDouble
+     }
+     val sibsp = values(5).toDouble
+     val parch = values(6).toDouble
+     val fair = values(8) match {
+       case "NA" => 14.45
+       case l => l.toDouble
+     }
+
+      val numericalData = Array(pClass, age, sibsp, parch, fair)
 
      (Vectors.dense(numericalData), label)
     })

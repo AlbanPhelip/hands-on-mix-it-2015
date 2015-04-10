@@ -22,7 +22,7 @@ object KMeansClustering {
     val featuredData = cleanData.map(_._1)
     val labels = cleanData.map(_._2)
 
-    val model = KMeans.train(featuredData, 2, 5)
+    val model = KMeans.train(featuredData, 2, 20)
 
 
     // Evaluation
