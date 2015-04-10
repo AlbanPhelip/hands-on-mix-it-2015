@@ -19,14 +19,10 @@ object Utilities {
     val schema = rdd.first()
 
     // Remove first line from first partition only
-    (schema, rdd.mapPartitionsWithIndex( (partitionIdx: Int, lines: Iterator[String]) => {
-      if (partitionIdx == 0) {
-        lines.drop(1)
-      }
-      else {
-        lines
-      }
-    }))
+    (schema, rdd.mapPartitionsWithIndex {
+      case (0, l) => l.drop(1)
+      case (_, l) => l
+    })
   }
 
 
@@ -36,7 +32,7 @@ object Utilities {
    * @param data the data (a RDD[LabeledPoint])
    * @return A tuple giving the accuracy and the confusion matrix
    */
-  def getMetrics(model: RandomForestModel, data: RDD[LabeledPoint]): (Double, Matrix) = {
+  def getMetrics(model: RandomForestModel, data: RDD[LabeledPoint]): Double = {
 
     val predictionsAndLabels = data.map(l => (model.predict(l.features), l.label))
 
@@ -45,7 +41,7 @@ object Utilities {
     val accuracy = if(metrics.precision > 0.5) 1d - metrics.precision else metrics.precision
     val confusion = metrics.confusionMatrix
 
-    (accuracy, confusion)
+    accuracy
   }
 
 }
