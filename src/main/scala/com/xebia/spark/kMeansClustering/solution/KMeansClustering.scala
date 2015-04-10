@@ -19,8 +19,8 @@ object KMeansClustering {
 
     val cleanData = featureEngineering(data)
 
-    val featuredData = cleanData.map(_._1)
-    val labels = cleanData.map(_._2)
+    val featuredData = cleanData.map(_.features)
+    val labels = cleanData.map(_.label)
 
     val model = KMeans.train(featuredData, 2, 20)
 

@@ -1,4 +1,4 @@
-package com.xebia.spark.randomForestRegression.solution.features
+package com.xebia.spark.randomForestClassification.solution.features
 
 import org.apache.spark.mllib.linalg.{Vectors, Vector}
 import org.apache.spark.mllib.regression.LabeledPoint

@@ -1,4 +1,4 @@
-package com.xebia.spark.randomForestRegression.solution.tools
+package com.xebia.spark.randomForestClassification.solution.tools
 
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.model.RandomForestModel

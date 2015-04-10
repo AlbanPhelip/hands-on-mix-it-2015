@@ -1,6 +1,6 @@
-package com.xebia.spark.randomForestRegression.solution.modelling
+package com.xebia.spark.randomForestClassification.solution.modelling
 
-import com.xebia.spark.randomForestRegression.solution.tools.Utilities.getRMSE
+import com.xebia.spark.randomForestClassification.solution.tools.Utilities.getRMSE
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.RandomForest
 import org.apache.spark.mllib.tree.model.RandomForestModel

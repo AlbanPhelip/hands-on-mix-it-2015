@@ -1,8 +1,8 @@
-package com.xebia.spark.randomForestRegression.solution
+package com.xebia.spark.randomForestClassification.solution
 
 
-import com.xebia.spark.randomForestRegression.solution.features.Engineering
-import com.xebia.spark.randomForestRegression.solution.tools.Utilities._
+import com.xebia.spark.randomForestClassification.solution.features.Engineering
+import com.xebia.spark.randomForestClassification.solution.tools.Utilities._
 import org.apache.spark.{SparkContext, SparkConf}
 
 
