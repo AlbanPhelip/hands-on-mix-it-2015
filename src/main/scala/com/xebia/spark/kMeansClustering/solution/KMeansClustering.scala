@@ -20,13 +20,12 @@ object KMeansClustering {
     val cleanData = featureEngineering(data)
 
     val featuredData = cleanData.map(_.features)
-    val labels = cleanData.map(_.label)
 
     val model = KMeans.train(featuredData, 2, 20)
 
 
     // Evaluation
-    val (accuracy, confusion) = getMetrics(model, featuredData, labels)
+    val (accuracy, confusion) = getMetrics(model, cleanData)
 
     // Print results
     println(s"Confusion Matrix: \n $confusion")

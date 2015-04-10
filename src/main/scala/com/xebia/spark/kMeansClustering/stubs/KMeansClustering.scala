@@ -19,11 +19,10 @@ object KMeansClustering {
      // TODO : use function in tools/Utilities to get an RDD without header
 
      // Feature Engineering
-     // TODO : use the featureEngineering method in features/Engineering to get cleaned data.
-     // Be carefull, you will get a RDD[(Vector, Double)] containing the data we want to analyse
-     // and the labels
+     // TODO : use the featureEngineering method in features/Engineering to get the cleaned data.
+     // Be carefull, you will get a RDD[LabeledPoint]
 
-     // TODO : put the data(RDD[Vector]) and the labels (RDD[Double]) in two different variables
+     // TODO : put the data (RDD[Vector]) and the labels (RDD[Double]) in two different variables
 
      // Modelling
      // TODO : Train a KMeans model on the data set
