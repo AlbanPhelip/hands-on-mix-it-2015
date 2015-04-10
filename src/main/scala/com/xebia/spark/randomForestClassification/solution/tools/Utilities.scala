@@ -1,5 +1,7 @@
 package com.xebia.spark.randomForestClassification.solution.tools
 
+import org.apache.spark.mllib.evaluation.MulticlassMetrics
+import org.apache.spark.mllib.linalg.{Matrix, Vector}
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.model.RandomForestModel
 import org.apache.spark.rdd.RDD
@@ -29,24 +31,21 @@ object Utilities {
 
 
   /**
-   * Calculate the Root Mean Square Error
-   * @param model A trained Random Forest Model
-   * @param data A RDD of LabeledPoint to be tested
-   * @return The RMSE
+   *
+   * @param model A KMeansModel from the methos Kmeans.train()
+   * @param data the data (a RDD[Vector])
+   * @param labels The labels (a RDD[Double])
+   * @return A tuple giving the accuracy and the confusion matrix
    */
-  def getRMSE(model: RandomForestModel, data: RDD[LabeledPoint]): Double = {
+  def getMetrics(model: RandomForestModel, data: RDD[Vector], labels: RDD[Double]): (Double, Matrix) = {
 
-    val predictionsAndLabels = data.map(example => (model.predict(example.features), example.label))
-    calculateRMSE(predictionsAndLabels)
-  }
+    val predictionsAndLabels = data.zip(labels).map(l => (model.predict(l._1), l._2))
+    val metrics: MulticlassMetrics = new MulticlassMetrics(predictionsAndLabels)
 
-  /**
-   * Compute the RMSE from the prediction and the labels
-   * @param rdd A RDD with the prediction and the labels
-   * @return The RMSE
-   */
-  def calculateRMSE(rdd: RDD[(Double, Double)]): Double ={
-    math.sqrt(rdd.map{case(v,p) => math.pow(v - p, 2)}.mean())
+    val accuracy = if(metrics.precision > 0.5) 1d - metrics.precision else metrics.precision
+    val confusion = metrics.confusionMatrix
+
+    (accuracy, confusion)
   }
 
 }

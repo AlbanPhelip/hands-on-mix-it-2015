@@ -16,10 +16,10 @@ object RandomForestClassification {
     val rawData = sc.textFile("./src/main/resources/data_titanic.csv")
     val (header, data) = extractHeader(rawData)
 
-    val cleandedData = Engineering.featureEngineering(data)
+    val cleanedData = Engineering.featureEngineering(data)
 
     data.take(20).foreach(println)
-    cleandedData.foreach(println)
+    cleanedData.foreach(println)
 
   }
 
