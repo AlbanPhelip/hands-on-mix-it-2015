@@ -1,6 +1,6 @@
-package com.xebia.spark.randomForestClassification.solution.modelling
+package com.xebia.spark.randomForestClassification.stubs.modelling
 
-import com.xebia.spark.randomForestClassification.solution.tools.Utilities.getMetricsRandomForest
+import com.xebia.spark.randomForestClassification.stubs.tools.Utilities.getMetricsRandomForest
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.tree.{RandomForest, DecisionTree}
 import org.apache.spark.mllib.tree.model.{RandomForestModel, DecisionTreeModel}
@@ -77,21 +77,22 @@ object TreeModelling {
            maxBins <- maxBinsGrid)
         yield {
 
-          val model = randomForestTrainClassifier(categoricalFeaturesInfo,
-            numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)(trainSet)
+          // TODO : Train a randomForestTrainClassifier on the train set with the selected parameters
 
-          val accuracyVal = getMetricsRandomForest(model, valSet)._1
+          // TODO : Get the accuracy from getMetricsRandomForest for prediction on the validation set
 
-          ((numTrees, impurity, maxDepth, maxBins), accuracyVal)
+          // TODO : Create a tuple in the following format :
+          // ((numTrees, impurity, maxDepth, maxBins), accuracyVal)
         }
 
-    val params = gridSearch.sortBy(_._2).reverse(0)._1
-    val numTrees = params._1
-    val impurity = params._2
-    val maxDepth = params._3
-    val maxBins = params._4
-
-    (categoricalFeaturesInfo, numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
+    // TODO : Uncomment the following lines to select the parameters returning the best results
+//    val params = gridSearch.sortBy(_._2).reverse(0)._1
+//    val numTrees = params._1
+//    val impurity = params._2
+//    val maxDepth = params._3
+//    val maxBins = params._4
+//
+//    (categoricalFeaturesInfo, numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
   }
 
 }
