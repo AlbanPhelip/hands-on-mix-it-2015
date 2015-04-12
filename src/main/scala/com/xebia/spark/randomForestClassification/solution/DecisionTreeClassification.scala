@@ -1,13 +1,13 @@
-package com.xebia.spark.randomForestClassification.solution
+package com.xebia.spark.DecisionTreeClassification.solution
 
 
 import com.xebia.spark.randomForestClassification.solution.features.Engineering
 import com.xebia.spark.randomForestClassification.solution.tools.Utilities._
-import com.xebia.spark.randomForestClassification.solution.modelling.TreeModelling.{randomForestTrainClassifier, gridSearchRandomForestClassifier}
+import com.xebia.spark.randomForestClassification.solution.modelling.TreeModelling.decisionTreeTrainClassifier
 import org.apache.spark.{SparkContext, SparkConf}
 
 
-object RandomForestClassification {
+object DecisionTreeClassification {
 
   def main(args: Array[String]) {
 
@@ -31,12 +31,12 @@ object RandomForestClassification {
     val categoricalFeaturesInfo = Map(1 -> 2, 6 -> 4)
 
     // -------- Training the model
-    val model = randomForestTrainClassifier(categoricalFeaturesInfo = categoricalFeaturesInfo, numTrees = 50,
+    val model = decisionTreeTrainClassifier(categoricalFeaturesInfo = categoricalFeaturesInfo,
       impurity = "entropy", maxDepth = 10, maxBins = 50)(trainSet)
 
     // Prediction & Evaluation
-    val (accuracyTrain, confusionTrain) = getMetricsRandomForest(model, trainSet)
-    val (accuracyTest, confusionTest) = getMetricsRandomForest(model, testSet)
+    val (accuracyTrain, confusionTrain) = getMetricsDecisionTree(model, trainSet)
+    val (accuracyTest, confusionTest) = getMetricsDecisionTree(model, testSet)
 
     // Print results
     println(s"Results for the training set")

@@ -1,13 +1,30 @@
 package com.xebia.spark.randomForestClassification.solution.modelling
 
-import com.xebia.spark.randomForestClassification.solution.tools.Utilities.getMetrics
+import com.xebia.spark.randomForestClassification.solution.tools.Utilities.getMetricsRandomForest
 import org.apache.spark.mllib.regression.LabeledPoint
-import org.apache.spark.mllib.tree.RandomForest
-import org.apache.spark.mllib.tree.model.RandomForestModel
+import org.apache.spark.mllib.tree.{RandomForest, DecisionTree}
+import org.apache.spark.mllib.tree.model.{RandomForestModel, DecisionTreeModel}
 import org.apache.spark.rdd.RDD
 
 
-object RandomForestObject {
+object TreeModelling {
+
+
+  /**
+   * Train a Decision Tree Classifier
+   * @param data: RDD[LabeledPoint] - The training set
+   * @param categoricalFeaturesInfo: A Map indicating which features are categorical and how many categories they contain
+   * @param impurity: The impurity measure to select the best feature for splitting ("entropy" or "gini")
+   * @param maxDepth: The maximum depth of each tree
+   * @param maxBins: The maximum number of leaves for each tree
+   * @return A DecisionTreeClassifier Model, usable to predict new data
+   */
+  def decisionTreeTrainClassifier(categoricalFeaturesInfo: Map[Int, Int] = Map[Int, Int](),
+                                  impurity: String = "entropy",
+                                  maxDepth: Int = 2,
+                                  maxBins: Int = 12)(data: RDD[LabeledPoint]) : DecisionTreeModel = {
+    DecisionTree.trainClassifier(data, 2, categoricalFeaturesInfo, impurity, maxDepth, maxBins)
+  }
 
 
   /**
@@ -63,7 +80,7 @@ object RandomForestObject {
           val model = RandomForest.trainClassifier(trainSet, 2, categoricalFeaturesInfo,
             numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
 
-          val accuracyVal = getMetrics(model, valSet)._1
+          val accuracyVal = getMetricsRandomForest(model, valSet)._1
 
           ((numTrees, impurity, maxDepth, maxBins), accuracyVal)
         }
