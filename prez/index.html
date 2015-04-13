@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Initiation au Machine Learning avec Spark</title>
+
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+
+    <link rel="stylesheet" type="text/css" href="css/theme/devoxx.css" id="theme">
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/solarized_light.css">
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+        pre.small-code {
+            font-size: 0.36em;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="reveal center">
+    <div class="slides">
+        <section class="front-page" data-background-image="images/bg.png">
+            <h1>Initiation au Machine Learning avec Spark</h1>
+            <aside class="notes">
+                <!-- Put our comments her -->
+            </aside>
+        </section>
+        <section>
+            <h2>Le Slide égocentrique obligatoire</h2>
+            <div>
+                <div class="avatar-container">
+                    <h6>Alban Phelip</h6>
+                    <img src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAFyAAAAJGE0MDBhYTJmLTk3NzMtNDZkOS1iY2FkLWI2Mzk1OTA0NjJhZQ.jpg"
+                         class="avatar"/>
+                    <p>Data Scientist</p>
+                </div>
+                <div class="avatar-container">
+                    <h6>Yoann Benoit</h6>
+                    <img src="https://pbs.twimg.com/profile_images/537182058540318720/BIo6pMtt.jpeg" class="avatar"/>
+                    <p>Data Scientist</p>
+                </div>
+                <div class="avatar-container">
+                    <style>
+                        .reveal .avatar-container{
+                            float:left;
+                            width: 50%;
+                            text-align: center;
+                            padding-bottom: 10px;
+                        }
+                        .reveal .avatar-container .avatar{
+                            width: 70%;
+                            margin:10px;
+                            border-radius: 10px;
+                            -moz-box-shadow: 5px 5px 20px 0px #cfcfcf;
+                            -webkit-box-shadow: 5px 5px 20px 0px #cfcfcf;
+                            -o-box-shadow: 5px 5px 20px 0px #cfcfcf;
+                            box-shadow: 5px 5px 20px 0px #cfcfcf;
+                            filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=20);
+                        }
+                    </style>
+                </div>
+                <div style="clear: both;border-top: 1px solid #CC6528;text-align: center">
+                    <p>Xebian's team</p>
+                </div>
+            </div>
+            <aside class="notes">
+                <!-- Put our comments her -->
+            </aside>
+        </section>
+        <section>
+            <h2>Agenda</h2>
+            <ol>
+                <li>Les bases du Machine Learning</li>
+                <li>Présentation de Spark & MLlib</li>
+                <li>K-Means: Présentation et TP</li>
+                <li>Decision Trees: Présentation et TP</li>
+                <li>Pour aller plus loin : Random Forest</li>
+            </ol>
+            <aside class="notes">
+                <!-- Put our comments her -->
+            </aside>
+        </section>
+        <section>
+            <h2 class="alone">Les bases du machine learning</h2>
+            <aside class="notes">
+                <!-- Put our comments her -->
+            </aside>
+        </section>
+        <section>
+            <section>
+                <div class="center">
+                    <img src="images/ml.png" />
+                </div>
+                <aside class="notes">
+                    <!-- Put our comments her -->
+                </aside>
+            </section>
+            <section>
+                <h3>Qu'est ce donc ?</h3>
+                <blockquote>
+                    L’apprentissage machine est l’étude des algorithmes
+                    qui s’améliorent automatiquement en fonction de l’expérience.
+                </blockquote>
+                -- Tom Mitchell
+                <aside class="notes">
+                    <!-- Put our comments her -->
+                </aside>
+            </section>
+            <section>
+                On utilise leurs résultats sans forcément s'en rendre compte
+                <aside class="notes">
+                    <!-- Put our comments her -->
+                </aside>
+            </section>
+        </section>
+        <section>
+            <h3>Cas d'utilisation</h3>
+            <section>
+                <div class="half">
+                    <p>Classification</p>
+                </div>
+                <div class="half">
+                    new.google.fr
+                    <img height="500px" src="images/classification.png" />
+                </div>
+            </section>
+            <section>
+                <div class="half">
+                    <p>Régréssion</p>
+                </div>
+                <div class="half">
+                    <img src="images/regression.png" />
+                </div>
+            </section>
+            <section>
+                <div class="half">
+                    <p>Recommandation</p>
+                </div>
+                <div class="half">
+                    <img src="images/reco.png" />
+                </div>
+            </section>
+            <section>
+                <div class="half">
+                    <p>Clustering</p>
+                </div>
+                <div class="half">
+                    <img src="images/clustering.png" />
+                </div>
+            </section>
+        </section>
+        <section>
+            <h3>Approches : supervisé (dirigé)</h3>
+               On dispose d'exemples, et pour chaque exemple, le résultat attendu.
+            <p>
+                Ex: Des tweets et leurs tags associés
+            </p>
+        </section>
+        <section>
+            <h3>Approches : non supervisé</h3>
+            On dispose de données brutes, mais pas de résultat attendu. Juste des données brutes.
+            <p>
+                Ex: Logs server web
+            </p>
+        </section>
+        <section>
+            <h3>Approches : apprentissage par renforcement</h3>
+            Pour chaque état dans notre domaine, on peut associer une récompense.
+            <p>
+                Ex: Vol acrobatique d'hélicoptère
+            </p>
+            <a href="http://cs.stanford.edu/groups/helicopter/papers/nips06-aerobatichelicopter.pdf">cs.stanford.edu/groups/helicopter/papers/nips06-aerobatichelicopter.pdf</a>
+        </section>
+        <section>
+            <h3>Comment en arrive-t'on à avoir besoin de ML ?</h3>
+            <ol>
+                <li>On observe un phénomène</li>
+                <li>On a du mal à trouver un algo précis</li>
+                <li>On utilise un algo qui va apprendre à approximer le phénomène réel</li>
+            </ol>
+        </section>
+        <section>
+            <h3>A l'utilisation, comment ça se passe ?</h3>
+            Le machine Machine learning c'est comme la crypto
+            <p>Utilisez des implémentations éprouvées.</p>
+        </section>
+        <section>
+            <h2 class="alone">Spark & MLlib</h2>
+            <aside class="notes">
+                <!-- Put our comments her -->
+            </aside>
+        </section>
+        <section>
+            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161394/logo_hadoop.png">
+        </section>
+        <section>
+            <div class="center">
+                <img height="180px" src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161474/apache.png">
+                <div class="fragment">
+                    <div style="width:49%;display: inline-block;">
+                        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161546/hdfs.png">
+                    </div>
+                    <div style="width:49%;display: inline-block;">
+                        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161548/Mapreduce.png">
+                    </div>
+                </div>
+                <div class="fragment">
+                    <div style="width:32.9%;display: inline-block;">
+                        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161329/hive3.png">
+                    </div>
+                    <div style="width:32.9%;display: inline-block;text-align: center;">
+                        <img src="images/pig.png">
+                        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1158543/storm.png">
+                    </div>
+                    <div style="width:32.9%;display: inline-block;">
+                        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1158538/hbase.png">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section>
+            <h3>MapReduce</h3>
+            <div class="center">
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1165414/MRSandwich.png">
+            </div>
+            <aside class="notes">
+                Slide mapreduce : Appuyé sur le fait qu’on peut paralléliser le processus de découpe et d’assemblage indépendamment.
+            </aside>
+        </section>
+        <section>
+            <h3>MapReduce</h3>
+            <div class="center">
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161437/example-mapreduce-wordcount.png">
+            </div>
+        </section>
+        <section>
+            <div class="center">
+                <p>Beaucoup de lecture/écriture sur disque&nbsp;</p>
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161408/disque-dur.png">
+            </div>
+        </section>
+        <section>
+            <p>Très verbeux...</p>
+            <pre class="java"><code class="hljs">
+package org.myorg;
+
+import java.io.IOException;
+import java.util.*;
+
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.conf.*;
+import org.apache.hadoop.io.*;
+import org.apache.hadoop.mapreduce.*;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+
+public class WordCount {
+
+    public static class Map extends Mapper&lt;LongWritable, Text, Text, IntWritable> {
+        private final static IntWritable one = new IntWritable(1);
+        private Text word = new Text();
+
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+            String line = value.toString();
+            StringTokenizer tokenizer = new StringTokenizer(line);
+            while (tokenizer.hasMoreTokens()) {
+                word.set(tokenizer.nextToken());
+                context.write(word, one);
+            }
+        }
+    }
+
+    public static class Reduce extends Reducer&lt;Text, IntWritable, Text, IntWritable> {
+
+        public void reduce(Text key, Iterable&lt;IntWritable> values, Context context)
+            throws IOException, InterruptedException {
+            int sum = 0;
+            for (IntWritable val : values) {
+                sum += val.get();
+            }
+            context.write(key, new IntWritable(sum));
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
+
+        Job job = new Job(conf, "wordcount");
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(IntWritable.class);
+
+        job.setMapperClass(Map.class);
+        job.setReducerClass(Reduce.class);
+
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
+
+        FileInputFormat.addInputPath(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+        job.waitForCompletion(true);
+    }
+
+}
+            </code></pre>
+        </section>
+        <section>
+            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161401/spark_logo.png">
+        </section>
+        <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1165451/baby.jpg">
+            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1158822/amplab_hires.png" height="78px">
+        </section>
+        <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1165447/renaud.jpg">
+            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161563/apache.png" style="margin-left:13em">
+        </section>
+        <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1165444/success.jpg">
+            <img src="images/databricks.png" height="98px">
+        </section>
+        <section>
+            <div class="center"><img src="images/RAM.png"></div>
+        </section>
+        <section>
+            <div class="center">
+                <div style="display: inline-block;width:32.9%">
+                    <img width="161px" src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1159009/java.png">
+                </div>
+                <div style="display: inline-block;width:32.9%">
+                    <img width="131px" src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1159016/scala2.png">
+                    <br/>
+                    <img width="210px" class="fragment" src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1184057/r.png">
+                </div>
+                <div style="display: inline-block;width:32.9%">
+                    <img width="260px" src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1159017/python.png">
+                </div>
+                <img style="height:225px; display: inline-block;height:50%" src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1158993/spark-stack.png">
+            </div>
+        </section>
+        <section>
+            <h3>Resilient Distributed Datasets</h3>
+            <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161476/rdd.png">
+            <p class="center"><strong>Opérations</strong></p>
+            <p><strong>Transformations</strong> (e.g. map, filter, groupBy)</p>
+
+            <p><strong>Actions</strong> (e.g.&nbsp;count, collect)</p>
+        </section>
+        <section>
+            <div class="center">
+                <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1161567/Information.png">
+                <p><span class="bold">Un RDD est immutable</span></p>
+            </div>
+        </section>
+        <section>
+            <h3>Quelques exemples</h3>
+            <pre class="scala"><code class="hljs">
+scala> val textFile = sc.textFile("README.md")
+textFile: org.apache.spark.rdd.RDD[String] = README.md MappedRDD[3] at textFile at &lt;console>:12
+
+scala> textFile.count()
+res0: Long = 141
+
+scala> textFile.first()
+res1: String = # Apache Spark
+
+scala> val linesWithSpark = textFile.filter(line => line.contains("Spark"))
+linesWithSpark: org.apache.spark.rdd.RDD[String] = FilteredRDD[4] at filter at &lt;console>:14
+
+scala> linesWithSpark.count()
+res2: Long = 21
+
+scala> textFile.cache()
+res3: textFile.type = README.md MappedRDD[1] at textFile at &lt;console>:12
+            </code></pre>
+        </section>
+        <section>
+            <h3>Quelques commandes utiles</h3>
+            <pre><code class="hljs scala">
+val textFile = sc.textFile("README.md")
+
+// Prendre les 10 premières ligne d'un RDD
+val first10 = textFile.take(10)
+
+// Les afficher
+first10.foreach(println)
+
+// Les tuples
+val tuple = ("key1", 3)
+println(tuple._1) // Affiche key1
+println(tuple._2) // Affiche 3
+            </code></pre>
+        </section>
+        <section>
+            <h3>WordCount</h3>
+            <pre class="scala"><code class="hljs">
+import org.apache.sparkContext
+import org.apache.sparkContext._
+
+object wordCount {
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("WordCount").setMaster("local[4]")
+    val sc = new SparkContext(conf)
+    val textFile = sc.textFile("README.md")
+    val count = textFile.flatMap(line => line.split(" "))
+        .map(word => (word, 1))
+        .reduceByKey(_+_)
+
+    count.saveAsTextFile("/path/to/file")
+  }
+}
+
+            </code></pre>
+        </section>
+        <section data-background-image="https://s3.amazonaws.com/media-p.slid.es/uploads/albanphelip/images/1165437/machine-learning.jpg">
+            <h2 style="text-align: right">MLlib</h2>
+        </section>
+        <section>
+            <ul>
+                <li>Kmeans</li>
+                <li>Naive Bayes</li>
+                <li>Random Forests</li>
+                <li>Regressions (logistic&nbsp;&amp;&nbsp;linear)</li>
+                <li>Support Vector Machine</li>
+                <li>Decision Trees</li>
+                <li>Gradient Boosting</li>
+                <li>Alternative Least Square</li>
+                <li>Principal Component Analysis</li>
+                <li>Stochastic Gradient Descent</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Les Vectors</h3>
+            <pre class="scala"><code class="hljs">
+import org.apache.spark.mllib.linalg.{Vector, Vectors}
+
+// Create a dense vector (1.0, 0.0, 3.0).
+val dv = Vectors.dense(1.0, 0.0, 3.0)
+
+// Create a sparse vector (1.0, 0.0, 3.0).
+val sv1 = Vectors.sparse(3, Array(0, 2), Array(1.0, 3.0))
+
+// Create a sparse vector (1.0, 0.0, 3.0).
+val sv2 = Vectors.sparse(3, Seq((0, 1.0), (2, 3.0)))
+            </code></pre>
+
+        </section>
+        <section>
+            <h3>Les Labeled Point</h3>
+            <pre class="scala"><code class="hljs">
+import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.regression.LabeledPoint
+
+// Create a labeled point with a positive label and a dense feature vector.
+val pos = LabeledPoint(1.0, Vectors.dense(1.0, 0.0, 3.0))
+
+// Create a labeled point with a negative label and a sparse feature vector.
+val neg = LabeledPoint(0.0, Vectors.sparse(3, Array(0, 2), Array(1.0, 3.0)))
+            </code></pre>
+        </section>
+        <section id="data_science_pipeline">
+            <h3>Démarche globale en Data Science</h3>
+            <p class="offset-left">
+                <li>
+                    Step 1 : Chargement des données
+                </li>
+                <li>
+                    Step 2 : Feature Engineeging (Nettoyage, création et préparation des features)
+                </li>
+                <li>
+                    Step 3 : Splitting (train, validation et test sets)
+                </li>
+                <li>
+                    Step 4 : Tuning des paramètres (à la main ou grid search)
+                </li>
+                <li>
+                    Step 5 : Modelling sur train+validation set
+                </li>
+                <li>
+                    Step 6 : Prediction sur le test set
+                </li>
+            </p>
+        </section>
+        <section>
+            <h2>K-Means en Spark</h2>
+        </section>
+        <section>
+            <h3>Kmeans</h3>
+            <section>
+                <p><span class="bold">Type</span> : Non supervisé</p>
+                <p><span class="bold">But</span> : Trouver des groupes dans un jeu de données</p>
+            </section>
+            <section>
+                <p><span class="bold">Exemple</span> : Quels groupes puis-je identifier dans ma base client ?</p>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <td>Client 1</td>
+                        <td>24ans</td>
+                        <td>1 exemplaire</td>
+                    </tr>
+                    <tr>
+                        <td>Client 2</td>
+                        <td>32ans</td>
+                        <td>2 exemplaires</td>
+                    </tr>
+                    <tr>
+                        <td>Client 3</td>
+                        <td>37ans</td>
+                        <td>5 exemplaires</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <p class="fragment center">
+                   Points : (24;1), (32;2), (37;5)
+                </p>
+            </section>
+            <section>
+                <img src="images/kmean1.png">
+            </section>
+            <section>
+                <img src="images/kmean2.png">
+            </section>
+            <section>
+                <img src="images/kmean3.png">
+            </section>
+            <section>
+                <img src="images/kmean4.png">
+            </section>
+            <section>
+                <img src="images/kmean5.png">
+            </section>
+            <section>
+                <img src="images/kmean6.png">
+            </section>
+            <section>
+                <h2>Implémentation</h2>
+            </section>
+            <section>
+                <h4>Solution: Main</h4>
+                <pre class="scala"><code class="hljs">
+// Loading data
+val rawData = sc.textFile("./src/main/resources/data_titanic.csv")
+
+// Parsing Data
+val data = extractHeader(rawData)._2
+
+// Feature Engineering
+val cleanData = featureEngineering(data)
+
+// Get the features
+val featuredData = cleanData.map(_.features)
+
+// Modelling
+val model = KMeans.train(featuredData, 2, 20)
+
+// Evaluation
+val (accuracy, confusion) = getMetrics(model, cleanData)
+
+// Print results
+println(s"Confusion Matrix: \n $confusion")
+println(s"Error: $accuracy")
+                </code></pre>
+            </section>
+        </section>
+        <section data-background-image="images/forest.png">
+            <h2 style="text-align: right">Decision Trees en Spark</h2>
+        </section>
+        <section>
+            <h3>Arbres de décision</h3>
+            <section>
+                <h4>Construction</h4>
+                <table style="width:60%; font-size:20px">
+                    <tr>
+                        <th>Sex</th>
+                        <th>Age</th> 
+                        <th>Class</th>
+                        <th>Alive</th>
+                    </tr>
+                    <tr>
+                        <td><font color="red">F</font></td>
+                        <td><font color="red">49</font></td> 
+                        <td><font color="red">1</font></td>
+                        <td><font color="red">No</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="red">M</font></td>
+                        <td><font color="red">18</font></td> 
+                        <td><font color="red">1</font></td>
+                        <td><font color="red">No</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">M</font></td>
+                        <td><font color="green">48</font></td> 
+                        <td><font color="green">1</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">F</font></td>
+                        <td><font color="green">19</font></td> 
+                        <td><font color="green">2</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">M</font></td>
+                        <td><font color="green">24</font></td> 
+                        <td><font color="green">2</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">F</font></td>
+                        <td><font color="green">24</font></td> 
+                        <td><font color="green">1</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="red">F</font></td>
+                        <td><font color="red">41</font></td> 
+                        <td><font color="red">3</font></td>
+                        <td><font color="red">No</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">M</font></td>
+                        <td><font color="green">74</font></td> 
+                        <td><font color="green">3</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="red">M</font></td>
+                        <td><font color="red">32</font></td> 
+                        <td><font color="red">2</font></td>
+                        <td><font color="red">No</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">F</font></td>
+                        <td><font color="green">71</font></td> 
+                        <td><font color="green">3</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="red">M</font></td>
+                        <td><font color="red">27</font></td> 
+                        <td><font color="red">1</font></td>
+                        <td><font color="red">No</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="red">M</font></td>
+                        <td><font color="red">31</font></td> 
+                        <td><font color="red">3</font></td>
+                        <td><font color="red">No</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">M</font></td>
+                        <td><font color="green">53</font></td> 
+                        <td><font color="green">2</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="green">F</font></td>
+                        <td><font color="green">27</font></td> 
+                        <td><font color="green">3</font></td>
+                        <td><font color="green">Yes</font></td>
+                    </tr>
+                    <tr>
+                        <td><font color="red">F</font></td>
+                        <td><font color="red">19</font></td> 
+                        <td><font color="red">1</font></td>
+                        <td><font color="red">No</font></td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <h4>Construction</h4>
+                <div class="center">
+                    <img width="450px" src="images/decisionTree1.png">
+                </div>
+                <div class="half">
+                    <table style="width:60%; font-size:20px">
+                        <tr>
+                            <th>Sex</th>
+                            <th>Age</th> 
+                            <th>Class</th>
+                            <th>Alive</th>
+                        </tr>
+                        <tr>
+                            <td><font color="red">F</font></td>
+                            <td><font color="red">49</font></td> 
+                            <td><font color="red">1</font></td>
+                            <td><font color="red">No</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">F</font></td>
+                            <td><font color="green">19</font></td> 
+                            <td><font color="green">2</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">F</font></td>
+                            <td><font color="green">24</font></td> 
+                            <td><font color="green">1</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="red">F</font></td>
+                            <td><font color="red">41</font></td> 
+                            <td><font color="red">3</font></td>
+                            <td><font color="red">No</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">F</font></td>
+                            <td><font color="green">71</font></td> 
+                            <td><font color="green">3</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">F</font></td>
+                            <td><font color="green">27</font></td> 
+                            <td><font color="green">3</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="red">F</font></td>
+                            <td><font color="red">19</font></td> 
+                            <td><font color="red">1</font></td>
+                            <td><font color="red">No</font></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half">
+                    <table style="width:60%; font-size:20px">
+                        <tr>
+                            <th>Sex</th>
+                            <th>Age</th> 
+                            <th>Class</th>
+                            <th>Alive</th>
+                        </tr>
+                        <tr>
+                            <td><font color="red">M</font></td>
+                            <td><font color="red">18</font></td> 
+                            <td><font color="red">1</font></td>
+                            <td><font color="red">No</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">M</font></td>
+                            <td><font color="green">48</font></td> 
+                            <td><font color="green">1</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">M</font></td>
+                            <td><font color="green">24</font></td> 
+                            <td><font color="green">2</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">M</font></td>
+                            <td><font color="green">74</font></td> 
+                            <td><font color="green">3</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="red">M</font></td>
+                            <td><font color="red">32</font></td> 
+                            <td><font color="red">2</font></td>
+                            <td><font color="red">No</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="red">M</font></td>
+                            <td><font color="red">27</font></td> 
+                            <td><font color="red">1</font></td>
+                            <td><font color="red">No</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="red">M</font></td>
+                            <td><font color="red">31</font></td> 
+                            <td><font color="red">3</font></td>
+                            <td><font color="red">No</font></td>
+                        </tr>
+                        <tr>
+                            <td><font color="green">M</font></td>
+                            <td><font color="green">53</font></td> 
+                            <td><font color="green">2</font></td>
+                            <td><font color="green">Yes</font></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <section>
+                <h4>Construction</h4>
+                <div class="center">
+                    <img width="800px" src="images/decisionTree2.png">
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <table style="width:60%; font-size:20px">
+                                    <tr>
+                                        <th>Sex</th>
+                                        <th>Age</th> 
+                                        <th>Class</th>
+                                        <th>Alive</th>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="red">F</font></td>
+                                        <td><font color="red">49</font></td> 
+                                        <td><font color="red">1</font></td>
+                                        <td><font color="red">No</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">F</font></td>
+                                        <td><font color="green">24</font></td> 
+                                        <td><font color="green">1</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="red">F</font></td>
+                                        <td><font color="red">19</font></td> 
+                                        <td><font color="red">1</font></td>
+                                        <td><font color="red">No</font></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table style="width:60%; font-size:20px">
+                                    <tr>
+                                        <th>Sex</th>
+                                        <th>Age</th> 
+                                        <th>Class</th>
+                                        <th>Alive</th>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">F</font></td>
+                                        <td><font color="green">19</font></td> 
+                                        <td><font color="green">2</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="red">F</font></td>
+                                        <td><font color="red">41</font></td> 
+                                        <td><font color="red">3</font></td>
+                                        <td><font color="red">No</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">F</font></td>
+                                        <td><font color="green">71</font></td> 
+                                        <td><font color="green">3</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">F</font></td>
+                                        <td><font color="green">27</font></td> 
+                                        <td><font color="green">3</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table style="width:60%; font-size:20px">
+                                    <tr>
+                                        <th>Sex</th>
+                                        <th>Age</th> 
+                                        <th>Class</th>
+                                        <th>Alive</th>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="red">M</font></td>
+                                        <td><font color="red">18</font></td> 
+                                        <td><font color="red">1</font></td>
+                                        <td><font color="red">No</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">M</font></td>
+                                        <td><font color="green">24</font></td> 
+                                        <td><font color="green">2</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="red">M</font></td>
+                                        <td><font color="red">32</font></td> 
+                                        <td><font color="red">2</font></td>
+                                        <td><font color="red">No</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="red">M</font></td>
+                                        <td><font color="red">27</font></td> 
+                                        <td><font color="red">1</font></td>
+                                        <td><font color="red">No</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="red">M</font></td>
+                                        <td><font color="red">31</font></td> 
+                                        <td><font color="red">3</font></td>
+                                        <td><font color="red">No</font></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table style="width:60%; font-size:20px">
+                                    <tr>
+                                        <th>Sex</th>
+                                        <th>Age</th> 
+                                        <th>Class</th>
+                                        <th>Alive</th>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">M</font></td>
+                                        <td><font color="green">48</font></td> 
+                                        <td><font color="green">1</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">M</font></td>
+                                        <td><font color="green">74</font></td> 
+                                        <td><font color="green">3</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                    <tr>
+                                        <td><font color="green">M</font></td>
+                                        <td><font color="green">53</font></td> 
+                                        <td><font color="green">2</font></td>
+                                        <td><font color="green">Yes</font></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <section>
+                <h4>Choix des caractéristiques - Entropie</h4>
+                <p>
+                    Mesure de l'incertitude dans un dataset
+                    $$H(A) = - [P(A=Yes) log(P(A=Yes)) + P(A=No) log(P(A=No))]$$
+                    <li>Maximal pour distribution uniforme</li>
+                    <li>Minimal si une seule classe représentée</li>
+                </p>
+                <p>On cherche à minimiser l'entropie des datasets créés après un split</p>
+                <p>
+                    A chaque split, on choisit la caractéristique qui va produire les meilleurs sous-ensembles en termes d'entropie
+                    <li>Calcul de l'entropie du dataset initial</li>
+                    <li>Soustraction pondérée des entropies des datasets créés après le split</li>
+                    <li>Sélection du meilleur résultat</li>
+                </p>
+            </section>
+            <section>
+                <h4>Paramètres à prendre en compte en Spark</h4>
+                <p>
+                    <li>categoricalFeaturesInfo : Mapping donnant la position et le nombre de classes des variables catégorielles (ex: Map(1 -> 2, 6 -> 4))</li>
+                    <li>maxDepth : Profondeur max de chaque arbre</li>
+                    <li>maxBins : Nombre maxomal de feuilles dans chaque arbre</li>
+                    <li>impurity : Critère de sélection de la meilleure caractéristique ("entropy" ou "gini")</li>
+                </p>
+            </section>
+            <section>
+                <h2>Implémentation</h2>
+            </section>
+            <section>
+                <h4>Solution: Main</h4>
+                <pre class="scala"><code class="hljs">
+// Loading data
+val rawData = sc.textFile("./src/main/resources/data_titanic.csv")
+
+// Parsing Data
+val data = extractHeader(rawData)._2
+
+// Feature Engineering
+val cleanedData = Engineering.featureEngineering(data)
+
+// Splitting data
+val Array(trainSet, testSet) = cleanedData.randomSplit(Array(0.75, 0.25))
+
+// Modelling
+// -------- Tuning parameters
+val categoricalFeaturesInfo = Map(1 -> 2, 6 -> 4)
+
+// -------- Training the model
+val model = decisionTreeTrainClassifier(categoricalFeaturesInfo = categoricalFeaturesInfo,
+  impurity = "entropy", maxDepth = 10, maxBins = 50)(trainSet)
+
+// Prediction & Evaluation
+val (accuracyTrain, confusionTrain) = getMetricsDecisionTree(model, trainSet)
+val (accuracyTest, confusionTest) = getMetricsDecisionTree(model, testSet)
+
+// Print results
+println(s"Results for the training set")
+println(s"\t Accuracy: $accuracyTrain %")
+println(s"\t Confusion Matrix: \n $confusionTrain")
+
+println(s"Results for the test set")
+println(s"\t Accuracy: $accuracyTest %")
+println(s"\t Confusion Matrix: \n $confusionTest")
+                </code></pre>
+            </section>
+        </section>
+        <section data-background-image="images/forest.png">
+            <h2 style="text-align: right">Random Forest en Spark</h2>
+        </section>
+        <section>
+            <h3>Random Forest</h3>
+            <section>
+                <div>
+                    <div class="half">
+                        <img src="images/RandomForest.png">
+                    </div>
+                    <div class="half">
+                        <p><span class="bold">Idée : </span>Créer plusieurs arbres et rassembler les prédictions pour prendre une décision finale plus stable.</p>
+                        <p><span class="bold">Principe:</span>
+                            <ul>
+                                <li>Ajout d'aléatoire dans la sélection des données</li>
+                                <li>Ajout d'aléatoire dans la sélection des features</li>
+                            </ul>
+                        </p>
+                        <p><span class="bold">Conclusion :</span> Moins interprétable (perte de la structure hiérarchique) mais gain en stabilité et robustesse</p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h4>Paramètres à prendre en compte en Spark</h4>
+                <p>
+                    <li>categoricalFeaturesInfo : Mapping donnant la position et le nombre de classes des variables catégorielles</li>
+                    <li><span class="bold">numTrees</span> : Nombre d'arbres à construire</li>
+                    <li>maxDepth : Profondeur max de chaque arbre</li>
+                    <li>maxBins : Nombre maxomal de feuilles dans chaque arbre</li>
+                    <li>impurity : Critère de sélection de la meilleure caractéristique ("entropy" ou "gini")</li>
+                    <li><span class="bold">featuresSubsetStrategy</span> : Nombre de caractéristiques à prendre en compte à chaque split ("auto")</li>
+                </p>
+            </section>
+            <section>
+                <h2>Implémentation 1</h2>
+            </section>
+            <section>
+                <h4>Solution: Main</h4>
+                <pre class="scala"><code class="hljs">
+// Loading data
+val rawData = sc.textFile("./src/main/resources/data_titanic.csv")
+
+// Parsing Data
+val data = extractHeader(rawData)._2
+
+// Feature Engineering
+val cleanedData = Engineering.featureEngineering(data)
+
+// Splitting data
+val Array(trainSet, testSet) = cleanedData.randomSplit(Array(0.75, 0.25))
+
+// Modelling
+// -------- Tuning parameters
+val categoricalFeaturesInfo = Map(1 -> 2, 6 -> 4)
+
+// -------- Training the model
+val model = randomForestTrainClassifier(categoricalFeaturesInfo = categoricalFeaturesInfo, numTrees = 50,
+  impurity = "entropy", maxDepth = 10, maxBins = 50)(trainSet)
+
+// Prediction & Evaluation
+val (accuracyTrain, confusionTrain) = getMetricsRandomForest(model, trainSet)
+val (accuracyTest, confusionTest) = getMetricsRandomForest(model, testSet)
+
+// Print results
+println(s"Results for the training set")
+println(s"\t Accuracy: $accuracyTrain %")
+println(s"\t Confusion Matrix: \n $confusionTrain")
+
+println(s"Results for the test set")
+println(s"\t Accuracy: $accuracyTest %")
+println(s"\t Confusion Matrix: \n $confusionTest")
+                </code></pre>
+            </section>
+            <section>
+                <h2>Implémentation 2</h2>
+            </section>
+            <section>
+                <h4>Solution: Grid Search</h4>
+                <pre class="scala"><code class="hljs">
+def gridSearchRandomForestClassifier(trainSet: RDD[LabeledPoint],
+                                   valSet: RDD[LabeledPoint],
+                                   categoricalFeaturesInfo: Map[Int, Int] = Map[Int, Int](),
+                                   numTreesGrid: Array[Int] = Array(10),
+                                   featuresSubsetStrategy: String = "auto",
+                                   impurityGrid: Array[String] = Array("entropy"),
+                                   maxDepthGrid: Array[Int] = Array(2),
+                                   maxBinsGrid: Array[Int] = Array(4)) = {
+
+val gridSearch =
+
+  for (numTrees <- numTreesGrid;
+       impurity <- impurityGrid;
+       maxDepth <- maxDepthGrid;
+       maxBins <- maxBinsGrid)
+    yield {
+
+      val model = randomForestTrainClassifier(categoricalFeaturesInfo,
+        numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)(trainSet)
+
+      val accuracyVal = getMetricsRandomForest(model, valSet)._1
+
+      ((numTrees, impurity, maxDepth, maxBins), accuracyVal)
+    }
+
+val params = gridSearch.sortBy(_._2).reverse(0)._1
+val numTrees = params._1
+val impurity = params._2
+val maxDepth = params._3
+val maxBins = params._4
+
+(categoricalFeaturesInfo, numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)
+}
+                </code></pre>
+            </section>
+            <section>
+                <h4>Solution: Main</h4>
+                <pre class="scala"><code class="hljs">
+// Loading data
+val rawData = sc.textFile("./src/main/resources/data_titanic.csv")
+
+// Parsing Data
+val data = extractHeader(rawData)._2
+
+// Feature Engineering
+val cleanedData = Engineering.featureEngineering(data)
+
+// Splitting data
+val Array(trainSet, valSet, testSet) = cleanedData.randomSplit(Array(0.7, 0.15, 0.15))
+
+// Modelling
+// -------- Tuning parameters
+val categoricalFeaturesInfo = Map(1 -> 2, 6 -> 4)
+val bestParams = gridSearchRandomForestClassifier(trainSet, valSet,
+  categoricalFeaturesInfo = categoricalFeaturesInfo, numTreesGrid = Array(10, 20),
+  impurityGrid = Array("entropy", "gini"), maxDepthGrid = Array(5, 10), maxBinsGrid = Array(30, 50))
+
+// -------- Training the model
+val dataTrain = sc.union(trainSet, valSet)
+val model = (randomForestTrainClassifier _).tupled(bestParams)(dataTrain)
+
+// Prediction & Evaluation
+val (accuracyTrain, confusionTrain) = getMetricsRandomForest(model, dataTrain)
+val (accuracyTest, confusionTest) = getMetricsRandomForest(model, testSet)
+
+// Print results
+println(s"Best parameters found : \n $bestParams \n")
+
+println(s"Results for the training set")
+println(s"\t Accuracy: $accuracyTrain %")
+println(s"\t Confusion Matrix: \n $confusionTrain \n")
+
+println(s"Results for the test set")
+println(s"\t Accuracy: $accuracyTest %")
+println(s"\t Confusion Matrix: \n $confusionTest")
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <h3>Data Frames</h3>
+            <section>
+                <h4>Exploration des données : Les Data Frames</h4>
+                <pre class="scala"><code class="hljs">
+    // sc is an existing SparkContext.
+    val sqlContext = new org.apache.spark.sql.SQLContext(sc)
+    // this is used to implicitly convert an RDD to a DataFrame.
+    import sqlContext.implicits._
+
+    // Define the schema using a case class.
+    case class Person(name: String, age: Int)
+
+    // Create an RDD of Person objects and register it as a table.
+    val people = sc.textFile("examples/src/main/resources/people.txt")
+                    .map(_.split(","))
+                    .map(p => Person(p(0), p(1).trim.toInt))
+                    .toDF()
+    people.registerTempTable("people")
+
+    // Examples
+    people.select("name").show()
+    people.filter(people("name") > 21).show()
+    people.groupBy("age").count().show()
+                </code></pre>
+            </section>
+            <section id="data_frame_exploration">
+                <h4>Exploration des données</h4>
+                <p class="offset-left">
+                    <li>
+                        Dans le shell, chargez le dataset dans un RDD, puis transformez-le en DataFrame
+                    </li>
+                    <li>
+                        Observez quelques valeurs de chaque feature
+                    </li>
+                    <li>
+                        Calculez quelques statistiques que chaque feature pour voir s'il n'y a pas de données manquantes ou d'outliers
+                    </li>
+                    <li>
+                        Modifiez les données si besoin
+                    </li>
+                </p>
+            </section>
+        </section>
+        <section class="back-page" data-background-image="images/bg.png">
+            <h1>Merci</h1>
+            <aside class="notes">
+                <!-- Put our comments her -->
+            </aside>
+        </section>
+    </div>
+    <div class="footer">
+        <span class="hashtag">#LearnMLWithSpark</span>
+        <span class="twitter">@MatBreton</span>
+        <span class="twitter">@YoannBENOIT</span>
+        <span class="twitter">@AlbanPhelip</span>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        backgroundTransition:'slide',
+        transition: 'slide', // none/fade/slide/convex/concave/zoom,
+
+        math: {
+            mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+            { src: 'plugin/math/math.js', async: true },
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true}
+        ]
+    });
+
+    Reveal.addEventListener('slidechanged', function (event) {
+        if (event.indexh == 0) {
+            document.querySelector('.reveal').classList.add('slide0');
+        } else {
+            document.querySelector('.reveal').classList.remove('slide0');
+        }
+
+    });
+
+
+    if (Reveal.getState().indexh == 0) {
+        document.querySelector('.reveal').classList.add('slide0');
+    }
+
+</script>
+
+</body>
+</html>
