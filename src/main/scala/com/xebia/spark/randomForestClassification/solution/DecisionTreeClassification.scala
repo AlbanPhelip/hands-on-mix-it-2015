@@ -1,4 +1,4 @@
-package com.xebia.spark.DecisionTreeClassification.solution
+package com.xebia.spark.randomForestClassification.solution
 
 
 import com.xebia.spark.randomForestClassification.solution.features.Engineering

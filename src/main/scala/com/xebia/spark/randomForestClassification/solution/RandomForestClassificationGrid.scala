@@ -1,4 +1,4 @@
-package com.xebia.spark.randomForestClassificationGrid.solution
+package com.xebia.spark.randomForestClassification.solution
 
 
 import com.xebia.spark.randomForestClassification.solution.features.Engineering
