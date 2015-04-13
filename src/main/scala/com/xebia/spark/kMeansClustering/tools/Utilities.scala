@@ -5,7 +5,7 @@ import org.apache.spark.mllib.evaluation.MulticlassMetrics
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
 import org.apache.spark.mllib.linalg.Matrix
-
+import org.apache.spark.mllib.linalg.Vector
 
 object Utilities {
 
@@ -45,6 +45,17 @@ object Utilities {
     (accuracy, confusion)
   }
 
+
+  def get(model: KMeansModel, data: RDD[LabeledPoint]) = {
+    val centroidsAndLabels = data.map(l => (model.predict(l.features).toDouble, l.label))
+    val truc = centroidsAndLabels.groupBy(_._1)
+    val chose = truc.map(l => (l._1, l._2.map(l => l._2).sum))
+
+
+
+    //model.clusterCenters
+    chose
+  }
 
 
 
