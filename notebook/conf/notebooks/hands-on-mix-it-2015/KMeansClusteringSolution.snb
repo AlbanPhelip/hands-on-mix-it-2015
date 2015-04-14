@@ -34,14 +34,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@42912ad6\n"
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@660ed947\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "org.apache.spark.SparkContext@42912ad6"
+        "text/html" : "org.apache.spark.SparkContext@660ed947"
       },
       "output_type" : "execute_result",
-      "execution_count" : 88
+      "execution_count" : 2
     } ]
   }, {
     "metadata" : { },
@@ -65,7 +65,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 89
+      "execution_count" : 3
     } ]
   }, {
     "metadata" : { },
@@ -93,7 +93,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 90
+      "execution_count" : 4
     } ]
   }, {
     "metadata" : { },
@@ -117,7 +117,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 91
+      "execution_count" : 5
     } ]
   }, {
     "metadata" : { },
@@ -141,7 +141,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 92
+      "execution_count" : 6
     } ]
   }, {
     "metadata" : { },
@@ -162,14 +162,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "rawData: org.apache.spark.rdd.RDD[String] = ./data/data_titanic.csv MapPartitionsRDD[338] at textFile at <console>:72\nres19: Long = 1310\n"
+      "text" : "rawData: org.apache.spark.rdd.RDD[String] = ./data/data_titanic.csv MapPartitionsRDD[1] at textFile at <console>:44\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "1310"
+        "text/html" : "./data/data_titanic.csv MapPartitionsRDD[1] at textFile at &lt;console&gt;:44"
       },
       "output_type" : "execute_result",
-      "execution_count" : 93
+      "execution_count" : 7
     } ]
   }, {
     "metadata" : { },
@@ -186,14 +186,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "data: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[339] at mapPartitionsWithIndex at <console>:75\n"
+      "text" : "data: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[2] at mapPartitionsWithIndex at <console>:51\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "MapPartitionsRDD[339] at mapPartitionsWithIndex at &lt;console&gt;:75"
+        "text/html" : "MapPartitionsRDD[2] at mapPartitionsWithIndex at &lt;console&gt;:51"
       },
       "output_type" : "execute_result",
-      "execution_count" : 94
+      "execution_count" : 8
     } ]
   }, {
     "metadata" : { },
@@ -210,14 +210,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "cleanData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = MapPartitionsRDD[340] at map at <console>:74\n"
+      "text" : "cleanData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = MapPartitionsRDD[3] at map at <console>:42\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "MapPartitionsRDD[340] at map at &lt;console&gt;:74"
+        "text/html" : "MapPartitionsRDD[3] at map at &lt;console&gt;:42"
       },
       "output_type" : "execute_result",
-      "execution_count" : 95
+      "execution_count" : 9
     } ]
   }, {
     "metadata" : { },
@@ -234,14 +234,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "featuredData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.linalg.Vector] = MapPartitionsRDD[341] at map at <console>:86\n"
+      "text" : "featuredData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.linalg.Vector] = MapPartitionsRDD[4] at map at <console>:54\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "MapPartitionsRDD[341] at map at &lt;console&gt;:86"
+        "text/html" : "MapPartitionsRDD[4] at map at &lt;console&gt;:54"
       },
       "output_type" : "execute_result",
-      "execution_count" : 96
+      "execution_count" : 10
     } ]
   }, {
     "metadata" : { },
@@ -258,14 +258,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "model: org.apache.spark.mllib.clustering.KMeansModel = org.apache.spark.mllib.clustering.KMeansModel@58d62a22\n"
+      "text" : "model: org.apache.spark.mllib.clustering.KMeansModel = org.apache.spark.mllib.clustering.KMeansModel@284f9f56\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "org.apache.spark.mllib.clustering.KMeansModel@58d62a22"
+        "text/html" : "org.apache.spark.mllib.clustering.KMeansModel@284f9f56"
       },
       "output_type" : "execute_result",
-      "execution_count" : 97
+      "execution_count" : 11
     } ]
   }, {
     "metadata" : { },
@@ -282,24 +282,15 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "([2.5499524262607043,28.148192197906756,0.38154138915318747,0.3082778306374881,14.937745004757385],0.3235014272121789)\n([1.3455497382198953,34.7303664921466,1.0890052356020943,0.6439790575916231,70.71551099476441],0.5916230366492147)\n([1.0,41.0,0.0,0.5,512.3292],1.0)\n([1.0,35.5304238095238,0.6984126984126984,0.873015873015873,195.38710317460314],0.6825396825396826)\nstatsPerCluster: org.apache.spark.rdd.RDD[(org.apache.spark.mllib.linalg.Vector, Double)] = MapPartitionsRDD[389] at map at <console>:103\n"
+      "text" : "([1.0,35.5304238095238,0.6984126984126984,0.873015873015873,195.38710317460314],0.6825396825396826)\n([1.3455497382198953,34.7303664921466,1.0890052356020943,0.6439790575916231,70.71551099476441],0.5916230366492147)\n([1.0,41.0,0.0,0.5,512.3292],1.0)\n([2.5499524262607043,28.148192197906756,0.38154138915318747,0.3082778306374881,14.937745004757385],0.3235014272121789)\nstatsPerCluster: org.apache.spark.rdd.RDD[(org.apache.spark.mllib.linalg.Vector, Double)] = MapPartitionsRDD[52] at map at <console>:55\n"
     }, {
       "metadata" : { },
       "data" : {
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 98
+      "execution_count" : 12
     } ]
-  }, {
-    "metadata" : {
-      "trusted" : true,
-      "input_collapsed" : false,
-      "collapsed" : true
-    },
-    "cell_type" : "code",
-    "source" : "",
-    "outputs" : [ ]
   } ],
   "nbformat" : 4
 }
