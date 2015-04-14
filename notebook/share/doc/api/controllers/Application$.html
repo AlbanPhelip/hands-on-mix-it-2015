@@ -972,6 +972,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
+    </li><li name="controllers.Application#GetClustersTimeout" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GetClustersTimeout:akka.util.Timeout"></a>
+      <a id="GetClustersTimeout:Timeout"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">GetClustersTimeout</span><span class="result">: <span class="extype" name="akka.util.Timeout">Timeout</span></span>
+      </span>
+      </h4>
+      
     </li><li name="play.api.mvc.Results#Gone" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Gone:Results.this.Status"></a>
       <a id="Gone:Status"></a>
@@ -2350,6 +2363,62 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>HeaderNames</dd></dl></div>
+    </li><li name="controllers.Application#addCluster" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addCluster():play.api.mvc.Action[play.api.libs.json.JsValue]"></a>
+      <a id="addCluster():Action[JsValue]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addCluster</span><span class="params">()</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt"> {
+   &quot;name&quot;: &quot;Med At Scale&quot;,
+   &quot;profile&quot;: &quot;Local&quot;,
+   &quot;template&quot;: {
+     &quot;customLocalRepo&quot;: &quot;/tmp/spark-notebook/repo&quot;,
+     &quot;customRepos&quot;: [],
+     &quot;customDeps&quot;: [
+       &quot;org.</p><div class="fullcomment"><div class="comment cmt"><p> {
+   &quot;name&quot;: &quot;Med At Scale&quot;,
+   &quot;profile&quot;: &quot;Local&quot;,
+   &quot;template&quot;: {
+     &quot;customLocalRepo&quot;: &quot;/tmp/spark-notebook/repo&quot;,
+     &quot;customRepos&quot;: [],
+     &quot;customDeps&quot;: [
+       &quot;org.bdgenomics.adam % adam-apis % 0.15.0&quot;,
+       &quot;- org.apache.hadoop % hadoop-client %   _&quot;,
+       &quot;- org.apache.spark  % spark-core    %   _&quot;,
+       &quot;- org.scala-lang    %     _         %   _&quot;,
+       &quot;- org.scoverage     %     _         %   _&quot;,
+       &quot;+ org.apache.spark  %  spark-mllib_2.10  % 1.2.0&quot;
+     ],
+     &quot;customImports&quot;: [
+       &quot;import org.apache.hadoop.fs.{FileSystem, Path}&quot;,
+       &quot;import org.bdgenomics.adam.converters.{ VCFLine, VCFLineConverter, VCFLineParser }&quot;,
+       &quot;import org.bdgenomics.formats.avro.{Genotype, FlatGenotype}&quot;,
+       &quot;import org.bdgenomics.adam.models.VariantContext&quot;,
+       &quot;import org.bdgenomics.adam.rdd.ADAMContext._&quot;,
+       &quot;import org.bdgenomics.adam.rdd.variation.VariationContext._&quot;,
+       &quot;import org.bdgenomics.adam.rdd.ADAMContext&quot;,
+       &quot;import org.apache.spark.rdd.RDD&quot;
+     ],
+     &quot;customSparkConf&quot;: {
+       &quot;spark.app.name&quot;: &quot;Local Adam Analysis&quot;,
+       &quot;spark.master&quot;: &quot;local[8]&quot;,
+       &quot;spark.executor.memory&quot;: &quot;1G&quot;,
+       &quot;spark.serializer&quot;: &quot;org.apache.spark.serializer.KryoSerializer&quot;,
+       &quot;spark.kryo.registrator&quot;: &quot;org.bdgenomics.adam.serialization.ADAMKryoRegistrator&quot;,
+       &quot;spark.kryoserializer.buffer.mb&quot;: &quot;4&quot;,
+       &quot;spark.kryo.referenceTracking&quot;: &quot;true&quot;,
+       &quot;spark.executor.memory&quot;: &quot;2g&quot;
+     }
+   }
+ }
+</p></div></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -2460,6 +2529,19 @@
       </span>
       </h4>
       
+    </li><li name="controllers.Application#clustersActor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="clustersActor:akka.actor.ActorRef"></a>
+      <a id="clustersActor:ActorRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clustersActor</span><span class="result">: <span class="extype" name="akka.actor.ActorRef">ActorRef</span></span>
+      </span>
+      </h4>
+      
     </li><li name="controllers.Application#config" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="config:notebook.server.NotebookConfig"></a>
       <a id="config:NotebookConfig"></a>
@@ -2512,42 +2594,42 @@
       </span>
       </h4>
       
-    </li><li name="controllers.Application#content" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="content(type:String,snb:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="content(String,String):Action[AnyContent]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">content</span><span class="params">(<span name="type">type: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="snb">snb: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
-      </span>
-      </h4>
-      
     </li><li name="controllers.Application#contents" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="contents(type:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="contents(String):Action[AnyContent]"></a>
+      <a id="contents(type:String,p:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
+      <a id="contents(String,String):Action[AnyContent]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">contents</span><span class="params">(<span name="type">type: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">contents</span><span class="params">(<span name="type">type: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="p">p: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;/&quot;</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
       </span>
       </h4>
       
-    </li><li name="controllers.Application#createKernel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="createKernel:play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="createKernel:Action[AnyContent]"></a>
+    </li><li name="controllers.Application#copyingNb" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="copyingNb(fp:String):scala.util.Try[play.api.mvc.Result]"></a>
+      <a id="copyingNb(String):Try[Result]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">createKernel</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">copyingNb</span><span class="params">(<span name="fp">fp: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="controllers.Application#createNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="createNotebook(p:String,custom:play.api.libs.json.JsObject):scala.util.Try[play.api.mvc.Result]"></a>
+      <a id="createNotebook(String,JsObject):Try[Result]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">createNotebook</span><span class="params">(<span name="p">p: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="custom">custom: <span class="extype" name="play.api.libs.json.JsObject">JsObject</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
       </span>
       </h4>
       
@@ -2565,15 +2647,15 @@
       </h4>
       
     </li><li name="controllers.Application#dash" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dash(title:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="dash(String):Action[AnyContent]"></a>
+      <a id="dash(title:String,p:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
+      <a id="dash(String,String):Action[AnyContent]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">dash</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">dash</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="p">p: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol"><span class="name"><a href="#base_kernel_url:String">base_kernel_url</a></span></span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
       </span>
       </h4>
       
@@ -2590,21 +2672,21 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Results</dd></dl></div>
-    </li><li name="controllers.Application#dlNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dlNotebook(name:String,id:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="dlNotebook(String,String):Action[AnyContent]"></a>
+    </li><li name="controllers.Application#deleteNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="deleteNotebook(p:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
+      <a id="deleteNotebook(String):Action[AnyContent]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">dlNotebook</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">deleteNotebook</span><span class="params">(<span name="p">p: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
       </span>
       </h4>
       
     </li><li name="controllers.Application#dlNotebookAs" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dlNotebookAs(path:String,format:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
+      <a id="dlNotebookAs(p:String,format:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
       <a id="dlNotebookAs(String,String):Action[AnyContent]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -2612,20 +2694,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">dlNotebookAs</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="format">format: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="controllers.Application#dlNotebookAsOld" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dlNotebookAsOld(name:String,id:String,format:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="dlNotebookAsOld(String,String,String):Action[AnyContent]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">dlNotebookAsOld</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="format">format: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">dlNotebookAs</span><span class="params">(<span name="p">p: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="format">format: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
       </span>
       </h4>
       
@@ -2778,19 +2847,6 @@
       </span>
       </h4>
       
-    </li><li name="controllers.Application#listNotebooks" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="listNotebooks:play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="listNotebooks:Action[AnyContent]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">listNotebooks</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
-      </span>
-      </h4>
-      
     </li><li name="controllers.Application#nbm" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="nbm:notebook.server.NotebookManager"></a>
       <a id="nbm:NotebookManager"></a>
@@ -2817,29 +2873,55 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="controllers.Application#newNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="newNotebook():play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="newNotebook():Action[AnyContent]"></a>
+    </li><li name="controllers.Application#newContent" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="newContent(p:String):play.api.mvc.Action[String]"></a>
+      <a id="newContent(String):Action[String]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">newNotebook</span><span class="params">()</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">newContent</span><span class="params">(<span name="p">p: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;/&quot;</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
       </h4>
       
-    </li><li name="controllers.Application#newNotebookOld" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="newNotebookOld:play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="newNotebookOld:Action[AnyContent]"></a>
+    </li><li name="controllers.Application#newDirectory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="newDirectory(path:String):scala.util.Try[play.api.mvc.Result]"></a>
+      <a id="newDirectory(String):Try[Result]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">newNotebookOld</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">newDirectory</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="controllers.Application#newFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="newFile(path:String):scala.util.Try[play.api.mvc.Result]"></a>
+      <a id="newFile(String):Try[Result]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">newFile</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="controllers.Application#newNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="newNotebook(path:String,tryJson:scala.util.Try[play.api.libs.json.JsValue]):scala.util.Try[play.api.mvc.Result]"></a>
+      <a id="newNotebook(String,Try[JsValue]):Try[Result]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">newNotebook</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="tryJson">tryJson: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>)</span><span class="result">: <span class="extype" name="scala.util.Try">Try</span>[<span class="extype" name="play.api.mvc.Result">Result</span>]</span>
       </span>
       </h4>
       
@@ -2883,33 +2965,20 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="controllers.Application#openKernel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="openKernel(kernelId:String,sessionId:String,pchannel:String):play.api.mvc.WebSocket[play.api.libs.json.JsValue,play.api.libs.json.JsValue]"></a>
-      <a id="openKernel(String,String,String):WebSocket[JsValue,JsValue]"></a>
+      <a id="openKernel(kernelId:String):play.api.mvc.WebSocket[play.api.libs.json.JsValue,play.api.libs.json.JsValue]"></a>
+      <a id="openKernel(String):WebSocket[JsValue,JsValue]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">openKernel</span><span class="params">(<span name="kernelId">kernelId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="sessionId">sessionId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pchannel">pchannel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;fixme&quot;</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.WebSocket">WebSocket</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>, <span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="controllers.Application#openKernelOld" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="openKernelOld(kernelId:String,pchannel:String):play.api.mvc.WebSocket[play.api.libs.json.JsValue,play.api.libs.json.JsValue]"></a>
-      <a id="openKernelOld(String,String):WebSocket[JsValue,JsValue]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">openKernelOld</span><span class="params">(<span name="kernelId">kernelId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pchannel">pchannel: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.WebSocket">WebSocket</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>, <span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
+        <span class="name">openKernel</span><span class="params">(<span name="kernelId">kernelId: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.WebSocket">WebSocket</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>, <span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
       </span>
       </h4>
       
     </li><li name="controllers.Application#openNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="openNotebook(name:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
+      <a id="openNotebook(p:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
       <a id="openNotebook(String):Action[AnyContent]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -2917,7 +2986,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">openNotebook</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+        <span class="name">openNotebook</span><span class="params">(<span name="p">p: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
       </span>
       </h4>
       
@@ -2947,6 +3016,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BodyParsers</dd></dl></div>
+    </li><li name="controllers.Application#profiles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="profiles():play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
+      <a id="profiles():Action[AnyContent]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">profiles</span><span class="params">()</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+      </span>
+      </h4>
+      
     </li><li name="controllers.Application#project" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="project:String"></a>
       <a id="project:String"></a>
@@ -2974,7 +3056,7 @@
       </h4>
       
     </li><li name="controllers.Application#renameNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="renameNotebook(snb:String):play.api.mvc.Action[play.api.libs.json.JsValue]"></a>
+      <a id="renameNotebook(p:String):play.api.mvc.Action[play.api.libs.json.JsValue]"></a>
       <a id="renameNotebook(String):Action[JsValue]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -2982,7 +3064,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">renameNotebook</span><span class="params">(<span name="snb">snb: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
+        <span class="name">renameNotebook</span><span class="params">(<span name="p">p: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
       </span>
       </h4>
       
@@ -3025,6 +3107,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Controller</dd></dl></div>
+    </li><li name="controllers.Application#restartKernel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="restartKernel(kernelId:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
+      <a id="restartKernel(String):Action[AnyContent]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">restartKernel</span><span class="params">(<span name="kernelId">kernelId: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
+      </span>
+      </h4>
+      
     </li><li name="controllers.Application#saveCheckpoint" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="saveCheckpoint(snb:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
       <a id="saveCheckpoint(String):Action[AnyContent]"></a>
@@ -3039,7 +3134,7 @@
       </h4>
       
     </li><li name="controllers.Application#saveNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="saveNotebook(snb:String):play.api.mvc.Action[play.api.libs.json.JsValue]"></a>
+      <a id="saveNotebook(p:String):play.api.mvc.Action[play.api.libs.json.JsValue]"></a>
       <a id="saveNotebook(String):Action[JsValue]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -3047,20 +3142,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">saveNotebook</span><span class="params">(<span name="snb">snb: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="controllers.Application#saveNotebookOld" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="saveNotebookOld(name:String,path:String,force:Boolean):play.api.mvc.Action[play.api.libs.json.JsValue]"></a>
-      <a id="saveNotebookOld(String,String,Boolean):Action[JsValue]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">saveNotebookOld</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="force">force: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
+        <span class="name">saveNotebook</span><span class="params">(<span name="p">p: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.libs.json.JsValue">JsValue</span>]</span>
       </span>
       </h4>
       
@@ -3074,19 +3156,6 @@
       </span>
       <span class="symbol">
         <span class="name">sessions</span><span class="params">()</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="controllers.Application#startKernel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="startKernel(kernelId:String)(implicitrequest:play.api.mvc.RequestHeader):play.api.mvc.Result"></a>
-      <a id="startKernel(String)(RequestHeader):Result"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">startKernel</span><span class="params">(<span name="kernelId">kernelId: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="request">request: <span class="extype" name="play.api.mvc.RequestHeader">RequestHeader</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Result">Result</span></span>
       </span>
       </h4>
       
@@ -3129,19 +3198,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="controllers.Application#viewNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="viewNotebook(name:String,id:String):play.api.mvc.Action[play.api.mvc.AnyContent]"></a>
-      <a id="viewNotebook(String,String):Action[AnyContent]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">viewNotebook</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="play.api.mvc.Action">Action</span>[<span class="extype" name="play.api.mvc.AnyContent">AnyContent</span>]</span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

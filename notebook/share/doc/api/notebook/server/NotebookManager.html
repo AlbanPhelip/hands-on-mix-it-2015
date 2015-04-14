@@ -199,28 +199,28 @@
               
         </dd></dl></div>
     </li><li name="notebook.server.NotebookManager#copyNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="copyNotebook(nbName:String,nbPath:String):String"></a>
-      <a id="copyNotebook(String,String):String"></a>
+      <a id="copyNotebook(nbPath:String):String"></a>
+      <a id="copyNotebook(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">copyNotebook</span><span class="params">(<span name="nbName">nbName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="nbPath">nbPath: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">copyNotebook</span><span class="params">(<span name="nbPath">nbPath: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
       
     </li><li name="notebook.server.NotebookManager#deleteNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="deleteNotebook(name:String,path:String):AnyVal"></a>
-      <a id="deleteNotebook(String,String):AnyVal"></a>
+      <a id="deleteNotebook(path:String):AnyVal"></a>
+      <a id="deleteNotebook(String):AnyVal"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">deleteNotebook</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+        <span class="name">deleteNotebook</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.AnyVal">AnyVal</span></span>
       </span>
       </h4>
       
@@ -295,20 +295,32 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="notebook.server.NotebookManager#getNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="getNotebook(name:String,path:String):Option[(String,String,String)]"></a>
-      <a id="getNotebook(String,String):Option[(String,String,String)]"></a>
+    </li><li name="notebook.server.NotebookManager#getName" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getName(path:String):String"></a>
+      <a id="getName(String):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getNotebook</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[(<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="java.lang.String">String</span>)]</span>
+        <span class="name">getName</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Attempts to select a notebook by ID first, if supplied and if the ID
-is known; falls back to supplied name otherwise.</p>
+      
+    </li><li name="notebook.server.NotebookManager#getNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getNotebook(path:String):Option[(String,String,String,String)]"></a>
+      <a id="getNotebook(String):Option[(String,String,String,String)]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getNotebook</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[(<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -331,7 +343,7 @@ is known; falls back to supplied name otherwise.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">incrementFileName</span><span class="params">(<span name="base">base: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">incrementFileName</span><span class="params">(<span name="base">base: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
       
@@ -348,21 +360,8 @@ is known; falls back to supplied name otherwise.</p>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="notebook.server.NotebookManager#listNotebooks" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="listNotebooks:play.api.libs.json.JsArray"></a>
-      <a id="listNotebooks:JsArray"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">listNotebooks</span><span class="result">: <span class="extype" name="play.api.libs.json.JsArray">JsArray</span></span>
-      </span>
-      </h4>
-      
     </li><li name="notebook.server.NotebookManager#load" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="load(name:String):Option[notebook.NBSerializer.Notebook]"></a>
+      <a id="load(path:String):Option[notebook.NBSerializer.Notebook]"></a>
       <a id="load(String):Option[Notebook]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -370,7 +369,7 @@ is known; falls back to supplied name otherwise.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">load</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="../NBSerializer$$Notebook.html" class="extype" name="notebook.NBSerializer.Notebook">Notebook</a>]</span>
+        <span class="name">load</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<a href="../NBSerializer$$Notebook.html" class="extype" name="notebook.NBSerializer.Notebook">Notebook</a>]</span>
       </span>
       </h4>
       
@@ -401,15 +400,15 @@ is known; falls back to supplied name otherwise.</p>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="notebook.server.NotebookManager#newNotebook" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="newNotebook():String"></a>
-      <a id="newNotebook():String"></a>
+      <a id="newNotebook(path:String,customLocalRepo:Option[String],customRepos:Option[List[String]],customDeps:Option[List[String]],customImports:Option[List[String]],customSparkConf:Option[play.api.libs.json.JsObject]):String"></a>
+      <a id="newNotebook(String,Option[String],Option[List[String]],Option[List[String]],Option[List[String]],Option[JsObject]):String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">newNotebook</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">newNotebook</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;/&quot;</span></span>, <span name="customLocalRepo">customLocalRepo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>, <span name="customRepos">customRepos: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">None</span></span>, <span name="customDeps">customDeps: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">None</span></span>, <span name="customImports">customImports: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">None</span></span>, <span name="customSparkConf">customSparkConf: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="play.api.libs.json.JsObject">JsObject</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
       
@@ -427,7 +426,7 @@ is known; falls back to supplied name otherwise.</p>
       </h4>
       
     </li><li name="notebook.server.NotebookManager#notebookFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="notebookFile(name:String):java.io.File"></a>
+      <a id="notebookFile(path:String):java.io.File"></a>
       <a id="notebookFile(String):File"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -435,7 +434,7 @@ is known; falls back to supplied name otherwise.</p>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notebookFile</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">notebookFile</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
       </span>
       </h4>
       
@@ -466,28 +465,28 @@ is known; falls back to supplied name otherwise.</p>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="notebook.server.NotebookManager#rename" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="rename(name:String,path:String):Option[Unit]"></a>
-      <a id="rename(String,String):Option[Unit]"></a>
+      <a id="rename(path:String,newpath:String):(String,String)"></a>
+      <a id="rename(String,String):(String,String)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">rename</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">rename</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="newpath">newpath: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)</span>
       </span>
       </h4>
       
     </li><li name="notebook.server.NotebookManager#save" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="save(name:String,path:String,notebook:notebook.NBSerializer.Notebook,overwrite:Boolean):Unit"></a>
-      <a id="save(String,String,Notebook,Boolean):Unit"></a>
+      <a id="save(path:String,notebook:notebook.NBSerializer.Notebook,overwrite:Boolean):(String,String)"></a>
+      <a id="save(String,Notebook,Boolean):(String,String)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">save</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="notebook">notebook: <a href="../NBSerializer$$Notebook.html" class="extype" name="notebook.NBSerializer.Notebook">Notebook</a></span>, <span name="overwrite">overwrite: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">save</span><span class="params">(<span name="path">path: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="notebook">notebook: <a href="../NBSerializer$$Notebook.html" class="extype" name="notebook.NBSerializer.Notebook">Notebook</a></span>, <span name="overwrite">overwrite: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: (<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>)</span>
       </span>
       </h4>
       

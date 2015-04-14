@@ -103,7 +103,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="NBSerializer$$CellMetadata.html"><span class="name">CellMetadata</span></a><span class="params">(<span name="trusted">trusted: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>, <span name="collapsed">collapsed: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="NBSerializer$$CellMetadata.html"><span class="name">CellMetadata</span></a><span class="params">(<span name="trusted">trusted: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>, <span name="input_collapsed">input_collapsed: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>, <span name="collapsed">collapsed: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Boolean">Boolean</span>]</span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -146,6 +146,19 @@
       </span>
       </h4>
       
+    </li><li name="notebook.NBSerializer.LanguageInfo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LanguageInfoextendsProductwithSerializable"></a>
+      <a id="LanguageInfo:LanguageInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="NBSerializer$$LanguageInfo.html"><span class="name">LanguageInfo</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="file_extension">file_extension: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="codemirror_mode">codemirror_mode: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
     </li><li name="notebook.NBSerializer.MarkdownCell" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MarkdownCellextendsNBSerializer.CellwithProductwithSerializable"></a>
       <a id="MarkdownCell:MarkdownCell"></a>
@@ -168,7 +181,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="NBSerializer$$Metadata.html"><span class="name">Metadata</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="user_save_timestamp">user_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="auto_save_timestamp">auto_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="language_info">language_info: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;scala&quot;</span></span>, <span name="trusted">trusted: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="NBSerializer$$Metadata.html"><span class="name">Metadata</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="user_save_timestamp">user_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="auto_save_timestamp">auto_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="language_info">language_info: <a href="NBSerializer$$LanguageInfo.html" class="extype" name="notebook.NBSerializer.LanguageInfo">LanguageInfo</a> = <span class="symbol">NBSerializer.this.scala</span></span>, <span name="trusted">trusted: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="customLocalRepo">customLocalRepo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>, <span name="customRepos">customRepos: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customDeps">customDeps: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customImports">customImports: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customSparkConf">customSparkConf: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="play.api.libs.json.JsObject">JsObject</span>] = <span class="symbol">scala.None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -568,6 +581,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="notebook.NBSerializer#languageInfoFormat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="languageInfoFormat:play.api.libs.json.Format[notebook.NBSerializer.LanguageInfo]"></a>
+      <a id="languageInfoFormat:Format[LanguageInfo]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">languageInfoFormat</span><span class="result">: <span class="extype" name="play.api.libs.json.Format">Format</span>[<a href="NBSerializer$$LanguageInfo.html" class="extype" name="notebook.NBSerializer.LanguageInfo">LanguageInfo</a>]</span>
+      </span>
+      </h4>
+      
     </li><li name="notebook.NBSerializer#markdownCellFormat" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="markdownCellFormat:play.api.libs.json.OFormat[notebook.NBSerializer.MarkdownCell]"></a>
       <a id="markdownCellFormat:OFormat[MarkdownCell]"></a>
@@ -708,6 +734,19 @@
       </span>
       <span class="symbol">
         <span class="name">read</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="NBSerializer$$Notebook.html" class="extype" name="notebook.NBSerializer.Notebook">Notebook</a></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.NBSerializer#scala" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="scala:notebook.NBSerializer.LanguageInfo"></a>
+      <a id="scala:LanguageInfo"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">scala</span><span class="result">: <a href="NBSerializer$$LanguageInfo.html" class="extype" name="notebook.NBSerializer.LanguageInfo">LanguageInfo</a></span>
       </span>
       </h4>
       

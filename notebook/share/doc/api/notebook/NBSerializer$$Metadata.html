@@ -35,7 +35,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">Metadata</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="user_save_timestamp">user_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="auto_save_timestamp">auto_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="language_info">language_info: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;scala&quot;</span></span>, <span name="trusted">trusted: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">Metadata</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="user_save_timestamp">user_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="auto_save_timestamp">auto_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="language_info">language_info: <a href="NBSerializer$$LanguageInfo.html" class="extype" name="notebook.NBSerializer.LanguageInfo">LanguageInfo</a> = <span class="symbol">NBSerializer.this.scala</span></span>, <span name="trusted">trusted: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="customLocalRepo">customLocalRepo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>, <span name="customRepos">customRepos: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customDeps">customDeps: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customImports">customImports: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customSparkConf">customSparkConf: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="play.api.libs.json.JsObject">JsObject</span>] = <span class="symbol">scala.None</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -80,7 +80,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="notebook.NBSerializer.Metadata#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(name:String,user_save_timestamp:java.util.Date,auto_save_timestamp:java.util.Date,language_info:String,trusted:Boolean):notebook.NBSerializer.Metadata"></a>
+      <a id="&lt;init&gt;(name:String,user_save_timestamp:java.util.Date,auto_save_timestamp:java.util.Date,language_info:notebook.NBSerializer.LanguageInfo,trusted:Boolean,customLocalRepo:Option[String],customRepos:Option[List[String]],customDeps:Option[List[String]],customImports:Option[List[String]],customSparkConf:Option[play.api.libs.json.JsObject]):notebook.NBSerializer.Metadata"></a>
       <a id="&lt;init&gt;:Metadata"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -88,7 +88,7 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">Metadata</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="user_save_timestamp">user_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="auto_save_timestamp">auto_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="language_info">language_info: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;scala&quot;</span></span>, <span name="trusted">trusted: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span>
+        <span class="name">Metadata</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="user_save_timestamp">user_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="auto_save_timestamp">auto_save_timestamp: <span class="extype" name="java.util.Date">Date</span> = <span class="symbol">new java.util.Date(0)</span></span>, <span name="language_info">language_info: <a href="NBSerializer$$LanguageInfo.html" class="extype" name="notebook.NBSerializer.LanguageInfo">LanguageInfo</a> = <span class="symbol">NBSerializer.this.scala</span></span>, <span name="trusted">trusted: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="customLocalRepo">customLocalRepo: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">scala.None</span></span>, <span name="customRepos">customRepos: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customDeps">customDeps: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customImports">customImports: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]] = <span class="symbol">scala.None</span></span>, <span name="customSparkConf">customSparkConf: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="play.api.libs.json.JsObject">JsObject</span>] = <span class="symbol">scala.None</span></span>)</span>
       </span>
       </h4>
       
@@ -211,6 +211,71 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="notebook.NBSerializer.Metadata#customDeps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="customDeps:Option[List[String]]"></a>
+      <a id="customDeps:Option[List[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customDeps</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.NBSerializer.Metadata#customImports" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="customImports:Option[List[String]]"></a>
+      <a id="customImports:Option[List[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customImports</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.NBSerializer.Metadata#customLocalRepo" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="customLocalRepo:Option[String]"></a>
+      <a id="customLocalRepo:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customLocalRepo</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.NBSerializer.Metadata#customRepos" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="customRepos:Option[List[String]]"></a>
+      <a id="customRepos:Option[List[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customRepos</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.List">List</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.NBSerializer.Metadata#customSparkConf" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="customSparkConf:Option[play.api.libs.json.JsObject]"></a>
+      <a id="customSparkConf:Option[JsObject]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customSparkConf</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="play.api.libs.json.JsObject">JsObject</span>]</span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -270,15 +335,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="notebook.NBSerializer.Metadata#language_info" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="language_info:String"></a>
-      <a id="language_info:String"></a>
+      <a id="language_info:notebook.NBSerializer.LanguageInfo"></a>
+      <a id="language_info:LanguageInfo"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">language_info</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">language_info</span><span class="result">: <a href="NBSerializer$$LanguageInfo.html" class="extype" name="notebook.NBSerializer.LanguageInfo">LanguageInfo</a></span>
       </span>
       </h4>
       

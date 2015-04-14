@@ -1,0 +1,230 @@
+{
+  "metadata" : {
+    "name" : "KMeansClusteringStubs",
+    "user_save_timestamp" : "1970-01-01T01:00:00.000Z",
+    "auto_save_timestamp" : "1970-01-01T01:00:00.000Z",
+    "language_info" : {
+      "name" : "scala",
+      "file_extension" : "scala",
+      "codemirror_mode" : "text/x-scala"
+    },
+    "trusted" : true,
+    "customLocalRepo" : null,
+    "customRepos" : null,
+    "customDeps" : null,
+    "customImports" : null,
+    "customSparkConf" : null
+  },
+  "cells" : [ {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "# KMeans Clustering"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###By default a SparkContext is available in the variable ***sparkContext***. We put it in a variable named ***sc*** for more simplicity"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "val sc = sparkContext",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@5fc85747\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "org.apache.spark.SparkContext@5fc85747"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 10
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###We import all the libraries we will need in this notebook"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "import org.apache.spark.rdd.RDD\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.linalg.Matrix\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.clustering.KMeans\nimport org.apache.spark.mllib.clustering.KMeansModel\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "import org.apache.spark.rdd.RDD\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.linalg.Matrix\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.clustering.KMeans\nimport org.apache.spark.mllib.clustering.KMeansModel\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 11
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###We declare several functions that will be used just after"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The featureEngineering function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "def featureEngineering(data : RDD[String]): RDD[LabeledPoint] = {\n  data.map(line => {\n\n    val values = line.split('$')\n    val label = values(1).toDouble\n\n    val pClass = values(0).toDouble\n\n    val age = values(4) match {\n      case \"NA\" => 28d\n      case l => l.toDouble\n    }\n    val sibsp = values(5).toDouble\n    val parch = values(6).toDouble\n    val fair = values(8) match {\n      case \"NA\" => 14.45\n      case l => l.toDouble\n    }\n\n    val numericalData = Array(pClass, age, sibsp, parch, fair)\n\n    LabeledPoint(label, Vectors.dense(numericalData))\n  })\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "featureEngineering: (data: org.apache.spark.rdd.RDD[String])org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint]\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 12
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The extract header function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n * Extract header of a dataset\n * @param rdd A RDD with a header inside\n * @return A tuple2. First element of the tuple is the header. Second element is the data.\n */\ndef extractHeader(rdd: RDD[String]): (String, RDD[String]) = {\n  // Take the first line (csv schema)\n  val schema = rdd.first()\n\n  // Remove first line from first partition only\n    (schema, rdd.mapPartitionsWithIndex {\n      case (0, l) => l.drop(1)\n      case (_, l) => l\n    })\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "extractHeader: (rdd: org.apache.spark.rdd.RDD[String])(String, org.apache.spark.rdd.RDD[String])\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 13
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The getStatsPerCluster function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n   * Gives the centroids of a KmeansModel and the proportion of survivors epr cluster\n   * @param model A KMeansModel from the method Kmeans.train()\n   * @param data The data (a RDD[LabeledPoint])\n   * @return The centroids and the proportion of survivors\n   */\n  def getStatsPerCluster(model: KMeansModel, data: RDD[LabeledPoint]) = {\n    val predictionAndLabels = data.map(l => (model.predict(l.features), l.label))\n    val centroids = model.clusterCenters\n\n    val numberOfDeathPerCluster = predictionAndLabels.reduceByKey(_+_).sortByKey()\n    val totalCountPerCluster = predictionAndLabels.map(l => (l._1, 1)).reduceByKey(_+_).sortByKey()\n\n    val proportionOfDeathPerCluster = numberOfDeathPerCluster.zip(totalCountPerCluster).map(l => (l._1._1, l._1._2/l._2._2))\n    proportionOfDeathPerCluster.map(l => (centroids(l._1), l._2))\n  }",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "getStatsPerCluster: (model: org.apache.spark.mllib.clustering.KMeansModel, data: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint])org.apache.spark.rdd.RDD[(org.apache.spark.mllib.linalg.Vector, Double)]\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 14
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###Your turn now ! Just follow the instructions"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Loading data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : true
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : read file ./data/data_titanic.csv",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#### Parsing Data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : true
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use extracHeader method to get an RDD without header",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#### Feature Engineering"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : true
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use the featureEngineering method to get the cleaned data.\n// Be carefull, you will get a RDD[LabeledPoint]",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#### Get the features"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : true
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : get the data we want to analyse (RDD[Vector])",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#### Modelling"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : true
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : Train a KMeans model on the data set",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#### Inspect population of each cluster"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : true
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : For each cluster look the center and the percentage of survivor\n// Use the getStatsPerCluster method",
+    "outputs" : [ ]
+  } ],
+  "nbformat" : 4
+}
