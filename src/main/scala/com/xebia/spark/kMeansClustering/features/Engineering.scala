@@ -27,7 +27,7 @@ object Engineering {
         case l => l.toDouble
       }
 
-      val numericalData = Array(/*pClass, age, sibsp, parch, */fair)
+      val numericalData = Array(pClass, age, sibsp, parch, fair)
 
       LabeledPoint(label, Vectors.dense(numericalData))
     })
