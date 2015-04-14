@@ -46,15 +46,15 @@ object Utilities {
   }
 
 
-  def get(model: KMeansModel, data: RDD[LabeledPoint]) = {
-    val centroidsAndLabels = data.map(l => (model.predict(l.features).toDouble, l.label))
-    val truc = centroidsAndLabels.groupBy(_._1)
-    val chose = truc.map(l => (l._1, l._2.map(l => l._2).sum))
+  def getStatsPerCluster(model: KMeansModel, data: RDD[LabeledPoint]) = {
+    val predictionAndLabels = data.map(l => (model.predict(l.features), l.label))
+    val centroids = model.clusterCenters
 
+    val numberOfDeathPerCluster = predictionAndLabels.reduceByKey(_+_).sortByKey()
+    val totalCountPerCluster = predictionAndLabels.map(l => (l._1, 1)).reduceByKey(_+_).sortByKey()
 
-
-    //model.clusterCenters
-    chose
+    val proportionOfDeathPerCluster = numberOfDeathPerCluster.zip(totalCountPerCluster).map(l => (l._1._1, l._1._2/l._2._2))
+    proportionOfDeathPerCluster.map(l => (centroids(l._1), l._2))
   }
 
 

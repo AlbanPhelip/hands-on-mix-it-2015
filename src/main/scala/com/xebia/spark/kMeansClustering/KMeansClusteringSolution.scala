@@ -26,7 +26,7 @@ object KMeansClusteringSolution {
     val featuredData = cleanData.map(_.features)
 
     // Modelling
-    val model = KMeans.train(featuredData, 4, 20)
+    val model = KMeans.train(featuredData, 2, 20)
 
     // Evaluation
     val (accuracy, confusion) = getMetrics(model, cleanData)
@@ -35,12 +35,9 @@ object KMeansClusteringSolution {
     println(s"Confusion Matrix: \n $confusion")
     println(s"Error: $accuracy")
 
-    val centroids = Utilities.get(model, cleanData)
-    println("pClass\tage\tsibsp\tparch\tfair")
-    centroids.foreach(println)
-
-
-
+    // Inspect population of each cluster
+    val statsPerCluster = Utilities.getStatsPerCluster(model, cleanData)
+    statsPerCluster.foreach(println)
 
   }
 

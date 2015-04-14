@@ -31,6 +31,9 @@ object KMeansClusteringStubs {
      // Print results
      // TODO : print confusion matrix and accuracy
 
+     // Inspect population of each cluster
+     // TODO : For each cluster look the center and the percentage of survivor. Use the getStatsPerCluster method in tools/Utilities
+
 
    }
 
