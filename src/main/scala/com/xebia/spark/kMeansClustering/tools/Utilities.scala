@@ -30,7 +30,7 @@ object Utilities {
   /**
    *
    * @param model A KMeansModel from the method Kmeans.train()
-   * @param data the data (a RDD[LabeledPoint])
+   * @param data The data (a RDD[LabeledPoint])
    * @return A tuple giving the accuracy and the confusion matrix
    */
   def getMetrics(model: KMeansModel, data: RDD[LabeledPoint]): (Double, Matrix) = {
@@ -46,6 +46,12 @@ object Utilities {
   }
 
 
+  /**
+   * Gives the centroids of a KmeansModel and the proportion of survivors epr cluster
+   * @param model A KMeansModel from the method Kmeans.train()
+   * @param data The data (a RDD[LabeledPoint])
+   * @return The centroids and the proportion of survivors
+   */
   def getStatsPerCluster(model: KMeansModel, data: RDD[LabeledPoint]) = {
     val predictionAndLabels = data.map(l => (model.predict(l.features), l.label))
     val centroids = model.clusterCenters

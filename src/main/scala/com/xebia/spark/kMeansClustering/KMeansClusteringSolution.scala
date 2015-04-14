@@ -28,13 +28,6 @@ object KMeansClusteringSolution {
     // Modelling
     val model = KMeans.train(featuredData, 2, 20)
 
-    // Evaluation
-    val (accuracy, confusion) = getMetrics(model, cleanData)
-
-    // Print results
-    println(s"Confusion Matrix: \n $confusion")
-    println(s"Error: $accuracy")
-
     // Inspect population of each cluster
     val statsPerCluster = Utilities.getStatsPerCluster(model, cleanData)
     statsPerCluster.foreach(println)

@@ -25,12 +25,6 @@ object KMeansClusteringStubs {
      // Modelling
      // TODO : Train a KMeans model on the data set
 
-     // Evaluation
-     // TODO : Call the getMetrics method in tools/Utilities on the data set
-
-     // Print results
-     // TODO : print confusion matrix and accuracy
-
      // Inspect population of each cluster
      // TODO : For each cluster look the center and the percentage of survivor. Use the getStatsPerCluster method in tools/Utilities
 
