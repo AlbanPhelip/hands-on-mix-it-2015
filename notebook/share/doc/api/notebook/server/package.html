@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>server - notebook.server</title>
+          <meta name="description" content="server - notebook.server" />
+          <meta name="keywords" content="server notebook.server" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'notebook.server.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="notebook">notebook</a></p>
+        <h1>server</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">server</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="notebook.server.CalcServiceMessage" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CalcServiceMessageextendsAnyRef"></a>
+      <a id="CalcServiceMessage:CalcServiceMessage"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="CalcServiceMessage.html"><span class="name">CalcServiceMessage</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.CalcWebSocketService" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CalcWebSocketServiceextendsAnyRef"></a>
+      <a id="CalcWebSocketService:CalcWebSocketService"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="CalcWebSocketService.html"><span class="name">CalcWebSocketService</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Provides a web-socket interface to the Calculator
+</p>
+    </li><li name="notebook.server.KernelMessage" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="KernelMessageextendsAnyRef"></a>
+      <a id="KernelMessage:KernelMessage"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="KernelMessage.html"><span class="name">KernelMessage</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Author: Ken
+</p>
+    </li><li name="notebook.server.NotebookConfig" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NotebookConfigextendsProductwithSerializable"></a>
+      <a id="NotebookConfig:NotebookConfig"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="NotebookConfig.html"><span class="name">NotebookConfig</span></a><span class="params">(<span name="config">config: <span class="extype" name="play.api.Configuration">Configuration</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.NotebookExistsException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NotebookExistsExceptionextendsIOException"></a>
+      <a id="NotebookExistsException:NotebookExistsException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NotebookExistsException.html"><span class="name">NotebookExistsException</span></a><span class="result"> extends <span class="extype" name="java.io.IOException">IOException</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.NotebookManager" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NotebookManagerextendsAnyRef"></a>
+      <a id="NotebookManager:NotebookManager"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NotebookManager.html"><span class="name">NotebookManager</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.Script" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ScriptextendsAnyRef"></a>
+      <a id="Script:Script"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Script.html"><span class="name">Script</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.ScriptFromFile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ScriptFromFileextendsScriptwithProductwithSerializable"></a>
+      <a id="ScriptFromFile:ScriptFromFile"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ScriptFromFile.html"><span class="name">ScriptFromFile</span></a><span class="params">(<span name="file">file: <span class="extype" name="java.io.File">File</span></span>)</span><span class="result"> extends <a href="Script.html" class="extype" name="notebook.server.Script">Script</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.ScriptFromSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ScriptFromSourceextendsScriptwithProductwithSerializable"></a>
+      <a id="ScriptFromSource:ScriptFromSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ScriptFromSource.html"><span class="name">ScriptFromSource</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="script">script: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="Script.html" class="extype" name="notebook.server.Script">Script</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.ScriptFromURL" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ScriptFromURLextendsScriptwithProductwithSerializable"></a>
+      <a id="ScriptFromURL:ScriptFromURL"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ScriptFromURL.html"><span class="name">ScriptFromURL</span></a><span class="params">(<span name="url">url: <span class="extype" name="java.net.URL">URL</span></span>)</span><span class="result"> extends <a href="Script.html" class="extype" name="notebook.server.Script">Script</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.SessionRequest" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SessionRequestextendsCalcServiceMessagewithProductwithSerializable"></a>
+      <a id="SessionRequest:SessionRequest"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="SessionRequest.html"><span class="name">SessionRequest</span></a><span class="params">(<span name="header">header: <span class="extype" name="play.api.libs.json.JsValue">JsValue</span></span>, <span name="session">session: <span class="extype" name="play.api.libs.json.JsValue">JsValue</span></span>, <span name="kernelRequest">kernelRequest: <span class="extype" name="notebook.client.CalcRequest">CalcRequest</span></span>)</span><span class="result"> extends <a href="CalcServiceMessage.html" class="extype" name="notebook.server.CalcServiceMessage">CalcServiceMessage</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.WebSockWrapper" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="WebSockWrapperextendsAnyRef"></a>
+      <a id="WebSockWrapper:WebSockWrapper"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="WebSockWrapper.html"><span class="name">WebSockWrapper</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Author: Ken
+</p>
+    </li><li name="notebook.server.WebSockWrapperImpl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="WebSockWrapperImplextendsWebSockWrapperwithLogging"></a>
+      <a id="WebSockWrapperImpl:WebSockWrapperImpl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="WebSockWrapperImpl.html"><span class="name">WebSockWrapperImpl</span></a><span class="result"> extends <a href="WebSockWrapper.html" class="extype" name="notebook.server.WebSockWrapper">WebSockWrapper</a> with <span class="extype" name="notebook.util.Logging">Logging</span></span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="notebook.server.InterruptCalculator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="InterruptCalculator"></a>
+      <a id="InterruptCalculator:InterruptCalculator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="InterruptCalculator$.html"><span class="name">InterruptCalculator</span></a><span class="result"> extends <a href="CalcServiceMessage.html" class="extype" name="notebook.server.CalcServiceMessage">CalcServiceMessage</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.RestartKernel" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RestartKernel"></a>
+      <a id="RestartKernel:RestartKernel"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RestartKernel$.html"><span class="name">RestartKernel</span></a><span class="result"> extends <a href="KernelMessage.html" class="extype" name="notebook.server.KernelMessage">KernelMessage</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="notebook.server.Shutdown" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Shutdown"></a>
+      <a id="Shutdown:Shutdown"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Shutdown$.html"><span class="name">Shutdown</span></a><span class="result"> extends <a href="KernelMessage.html" class="extype" name="notebook.server.KernelMessage">KernelMessage</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+    </body>
+      </html>
