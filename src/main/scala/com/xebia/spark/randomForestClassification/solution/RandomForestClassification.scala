@@ -24,7 +24,7 @@ object RandomForestClassification {
     val cleanedData = Engineering.featureEngineering(data)
 
     // Splitting data
-    val Array(trainSet, testSet) = cleanedData.randomSplit(Array(0.75, 0.25))
+    val Array(trainSet, testSet) = cleanedData.randomSplit(Array(0.75, 0.25), seed=1234)
 
     // Modelling
     // -------- Tuning parameters
