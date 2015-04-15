@@ -16,8 +16,8 @@ body {
 }
 
 .slide {
-    background: url('../../images/devoxx.png') white no-repeat fixed;
-    background-size: 80px;
+    background: url('../../images/logo-mixit.png') white no-repeat fixed;
+    background-size: 100px;
 }
 
 .center {
@@ -28,7 +28,7 @@ body {
     padding: 5px 0;
     position: fixed;
     bottom: 0;
-    background: #CC6528;
+    background: #26C4EC;
     width: 100%;
     color: white;
     font-size: 0.8em;
@@ -54,19 +54,19 @@ body {
 }
 
 .slide0 .footer {
-    background: #AAD663;
+    background: #26C4EC;
 }
 
 .reveal {
     font-family: 'Source Sans Pro', Helvetica, sans-serif;
     font-size: 38px;
     font-weight: normal;
-    color: #222;
+    color: #26C4EC;
 }
 
 ::selection {
     color: #fff;
-    background: #98bdef;
+    background: #26C4EC;
     text-shadow: none;
 }
 
@@ -84,7 +84,7 @@ body {
 .reveal h5,
 .reveal h6 {
     margin: 0 0 20px 0;
-    color: #222;
+    color: #26C4EC;
     font-family: 'Source Sans Pro', Helvetica, sans-serif;
     font-weight: 600;
     line-height: 1.2;
@@ -96,7 +96,7 @@ body {
 
 .reveal h1 {
     font-size: 2.5em;
-    color: #AAD663;
+    color: #26C4EC;
     border-bottom: 5px solid #CC6528;
     margin-top: -2em;
     margin-left: -1em;
@@ -106,7 +106,7 @@ body {
 
 .reveal h2 {
     font-size: 1.5em;
-    color: #AAD663;
+    color: #26C4EC;
     border-bottom: 5px solid #CC6528;
     text-align: left;
 }
@@ -114,7 +114,7 @@ body {
 .reveal h3 {
     font-size: 1.3em;
     text-align: left;
-    color: #AAD663;
+    color: #26C4EC;
 }
 
 .reveal h4 {
@@ -234,7 +234,7 @@ body {
     overflow: auto;
     max-height: 400px;
     word-wrap: normal;
-    border: 1px solid #CC6528;
+    border: 1px solid #26C4EC;
 }
 
 .reveal table {
@@ -278,7 +278,7 @@ body {
 }
 
 .reveal a {
-    color: #2a76dd;
+    color: #26C4EC;
     text-decoration: none;
     -webkit-transition: color 0.15s ease;
     -moz-transition: color 0.15s ease;
@@ -286,14 +286,14 @@ body {
 }
 
 .reveal a:hover {
-    color: #6ca2e8;
+    color: #26C4EC;
     text-shadow: none;
     border: none;
 }
 
 .reveal .roll span:after {
     color: #fff;
-    background: #1a54a1;
+    background: #26C4EC;
 }
 
 .reveal a img {
@@ -304,44 +304,44 @@ body {
 
 .reveal a:hover img {
     background: rgba(255, 255, 255, 0.2);
-    border-color: #2a76dd;
+    border-color: #26C4EC;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 
 .reveal .controls div.navigate-left,
 .reveal .controls div.navigate-left.enabled {
-    border-right-color: #CAFF76;
+    border-right-color: #26C4EC;
 }
 
 .reveal .controls div.navigate-right,
 .reveal .controls div.navigate-right.enabled {
-    border-left-color: #CAFF76;
+    border-left-color: #26C4EC;
 }
 
 .reveal .controls div.navigate-up,
 .reveal .controls div.navigate-up.enabled {
-    border-bottom-color: #CAFF76;
+    border-bottom-color: #26C4EC;
 }
 
 .reveal .controls div.navigate-down,
 .reveal .controls div.navigate-down.enabled {
-    border-top-color: #CAFF76;
+    border-top-color: #26C4EC;
 }
 
 .reveal .controls div.navigate-left.enabled:hover {
-    border-right-color: #A7F723;
+    border-right-color: #26C4EC;
 }
 
 .reveal .controls div.navigate-right.enabled:hover {
-    border-left-color: #A7F723;
+    border-left-color: #26C4EC;
 }
 
 .reveal .controls div.navigate-up.enabled:hover {
-    border-bottom-color: #A7F723;
+    border-bottom-color: #26C4EC;
 }
 
 .reveal .controls div.navigate-down.enabled:hover {
-    border-top-color: #A7F723;
+    border-top-color: #26C4EC;
 }
 
 .reveal .progress {
