@@ -34,11 +34,11 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@532f8d91\n"
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@18e647c4\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "org.apache.spark.SparkContext@532f8d91"
+        "text/html" : "org.apache.spark.SparkContext@18e647c4"
       },
       "output_type" : "execute_result",
       "execution_count" : 2
@@ -65,7 +65,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 11
+      "execution_count" : 3
     } ]
   }, {
     "metadata" : { },
@@ -93,7 +93,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 52
+      "execution_count" : 4
     } ]
   }, {
     "metadata" : { },
@@ -117,7 +117,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 8
+      "execution_count" : 5
     } ]
   }, {
     "metadata" : { },
@@ -141,7 +141,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 9
+      "execution_count" : 6
     } ]
   }, {
     "metadata" : { },
@@ -165,7 +165,7 @@
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 10
+      "execution_count" : 7
     } ]
   }, {
     "metadata" : { },
@@ -186,14 +186,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "rawData: org.apache.spark.rdd.RDD[String] = ./data/data_titanic.csv MapPartitionsRDD[12] at textFile at <console>:52\n"
+      "text" : "rawData: org.apache.spark.rdd.RDD[String] = ./data/data_titanic.csv MapPartitionsRDD[1] at textFile at <console>:44\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "./data/data_titanic.csv MapPartitionsRDD[12] at textFile at &lt;console&gt;:52"
+        "text/html" : "./data/data_titanic.csv MapPartitionsRDD[1] at textFile at &lt;console&gt;:44"
       },
       "output_type" : "execute_result",
-      "execution_count" : 31
+      "execution_count" : 8
     } ]
   }, {
     "metadata" : { },
@@ -210,14 +210,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "data: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[13] at mapPartitionsWithIndex at <console>:52\n"
+      "text" : "data: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[2] at mapPartitionsWithIndex at <console>:52\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "MapPartitionsRDD[13] at mapPartitionsWithIndex at &lt;console&gt;:52"
+        "text/html" : "MapPartitionsRDD[2] at mapPartitionsWithIndex at &lt;console&gt;:52"
       },
       "output_type" : "execute_result",
-      "execution_count" : 33
+      "execution_count" : 9
     } ]
   }, {
     "metadata" : { },
@@ -234,14 +234,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "cleanData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = MapPartitionsRDD[19] at map at <console>:59\n"
+      "text" : "cleanData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = MapPartitionsRDD[3] at map at <console>:43\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "MapPartitionsRDD[19] at map at &lt;console&gt;:59"
+        "text/html" : "MapPartitionsRDD[3] at map at &lt;console&gt;:43"
       },
       "output_type" : "execute_result",
-      "execution_count" : 53
+      "execution_count" : 10
     } ]
   }, {
     "metadata" : { },
@@ -258,14 +258,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "trainSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = PartitionwiseSampledRDD[20] at randomSplit at <console>:66\ntestSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = PartitionwiseSampledRDD[21] at randomSplit at <console>:66\n"
+      "text" : "trainSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = PartitionwiseSampledRDD[4] at randomSplit at <console>:54\ntestSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = PartitionwiseSampledRDD[5] at randomSplit at <console>:54\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "PartitionwiseSampledRDD[21] at randomSplit at &lt;console&gt;:66"
+        "text/html" : "PartitionwiseSampledRDD[5] at randomSplit at &lt;console&gt;:54"
       },
       "output_type" : "execute_result",
-      "execution_count" : 55
+      "execution_count" : 11
     } ]
   }, {
     "metadata" : { },
@@ -290,10 +290,10 @@
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "<div class=\"container-fluid\"><div><div class=\"col-md-12\"><div>\n    <script data-this=\"{&quot;dataId&quot;:&quot;anonee6087846e102d56e2ae6c8e57b9822e&quot;,&quot;dataInit&quot;:[{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:1,&quot;values&quot;:&quot;List(1, 2)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:2,&quot;Key&quot;:&quot;Key&quot;},{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:6,&quot;values&quot;:&quot;List(6, 4)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:4,&quot;Key&quot;:&quot;Key&quot;}],&quot;genId&quot;:&quot;2054606868&quot;}\" type=\"text/x-scoped-javascript\">/*<![CDATA[*/req(['../javascripts/notebook/playground','../javascripts/notebook/magic/tableChart'], \n      function(playground, _magictableChart) {\n        // data ==> data-this (in observable.js's scopedEval) ==> this in JS => { dataId, dataInit, ... }\n        // this ==> scope (in observable.js's scopedEval) ==> this.parentElement ==> div.container below (toHtml)\n\n        playground.call(data,\n                        this\n                        ,\n                        {\n    \"f\": _magictableChart,\n    \"o\": {\"headers\":[\"key\",\"value\",\"Key\",\"Value\",\"headers\",\"values\"],\"nrow\":2,\"shown\":25,\"width\":600,\"height\":400}\n  }\n  \n                        \n                        \n                      );\n      }\n    );/*]]>*/</script></div></div></div></div>"
+        "text/html" : "<div class=\"container-fluid\"><div><div class=\"col-md-12\"><div>\n    <script data-this=\"{&quot;dataId&quot;:&quot;anonf222205b093e8af2f759f02fb837d4bb&quot;,&quot;dataInit&quot;:[{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:1,&quot;values&quot;:&quot;List(1, 2)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:2,&quot;Key&quot;:&quot;Key&quot;},{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:6,&quot;values&quot;:&quot;List(6, 4)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:4,&quot;Key&quot;:&quot;Key&quot;}],&quot;genId&quot;:&quot;417685591&quot;}\" type=\"text/x-scoped-javascript\">/*<![CDATA[*/req(['../javascripts/notebook/playground','../javascripts/notebook/magic/tableChart'], \n      function(playground, _magictableChart) {\n        // data ==> data-this (in observable.js's scopedEval) ==> this in JS => { dataId, dataInit, ... }\n        // this ==> scope (in observable.js's scopedEval) ==> this.parentElement ==> div.container below (toHtml)\n\n        playground.call(data,\n                        this\n                        ,\n                        {\n    \"f\": _magictableChart,\n    \"o\": {\"headers\":[\"key\",\"value\",\"Key\",\"Value\",\"headers\",\"values\"],\"nrow\":2,\"shown\":25,\"width\":600,\"height\":400}\n  }\n  \n                        \n                        \n                      );\n      }\n    );/*]]>*/</script></div></div></div></div>"
       },
       "output_type" : "execute_result",
-      "execution_count" : 57
+      "execution_count" : 12
     } ]
   }, {
     "metadata" : { },

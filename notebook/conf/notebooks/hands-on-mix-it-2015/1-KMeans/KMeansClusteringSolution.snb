@@ -34,11 +34,11 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@289aa07f\n"
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@3947c6c\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "org.apache.spark.SparkContext@289aa07f"
+        "text/html" : "org.apache.spark.SparkContext@3947c6c"
       },
       "output_type" : "execute_result",
       "execution_count" : 2
