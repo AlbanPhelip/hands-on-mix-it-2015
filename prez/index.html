@@ -1089,6 +1089,26 @@ println(s"\t Confusion Matrix: \n $confusionTest")
             <section>
                 <h2>Implémentation 2</h2>
             </section>
+            <section id="grid_search">
+                <h4>Grid Search</h4>
+                <p class="offset-left">
+                    <p>
+                        <span class="bold">Objectif</span> : Tester, pour chaque paramètre, plusieurs possibilités
+                    </p>
+                    <p>
+                        <span class="bold">Réalisation :</span>
+                        <li>
+                            Pour chaque combinaison de paramètres, construire un modèle basé sur le train set
+                        </li>
+                        <li>
+                            Calculer le score de prédiction de chaque modèle sur le validation set
+                        </li>
+                        <li>
+                            Sélectionner le jeu de paramètres ayant donné le meilleur score
+                        </li>
+                    </p>
+                </p>
+            </section>
             <section>
                 <h4>Solution: Grid Search</h4>
                 <pre class="scala"><code class="hljs">
