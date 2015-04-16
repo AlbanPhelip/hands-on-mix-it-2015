@@ -557,6 +557,24 @@ val neg = LabeledPoint(0.0, Vectors.sparse(3, Array(0, 2), Array(1.0, 3.0)))
                 <h2>Implémentation</h2>
             </section>
             <section>
+                <h4>Organisation du projet</h4>
+                <p>
+                    <span class="bold">Sur l'IDE (solution à prioriser):</span>
+                    <li>Travail à réaliser dans "main.com.xebia.spark.kMeansClustering"</li>
+                    <li>Package features : Pour le Feature Engineering</li>
+                    <li>Package tools : Pour les métriques</li>
+                    <li>TODOs à compléter dans KMeansClusteringStubs</li>
+                </p>
+                <p>
+                    <span class="bold">Sur le notebook Spark (si IDE ne fonctionne pas):</span>
+                    <li>Dans la console, aller dans le dossier notebook</li>
+                    <li>Tapez "./bin/spark-notebook"</li>
+                    <li>Dans votre web browser, allez dans "localhost:9000"</li>
+                    <li>Aller dans "hands-on-mix-it-2015/1-KMeans"</li>
+                    <li>Lancer le notebook KMeansClusteringStubs et complétez les TODOs</li>
+                </p>
+            </section>
+            <section>
                 <h4>Solution: Main</h4>
                 <pre class="scala"><code class="hljs">
 // Loading data
@@ -976,6 +994,25 @@ println(s"Error: $accuracy")
                 <h2>Implémentation</h2>
             </section>
             <section>
+                <h4>Organisation du projet</h4>
+                <p>
+                    <span class="bold">Sur l'IDE (solution à prioriser):</span>
+                    <li>Travail à réaliser dans "main.com.xebia.spark.randomForestClassification.stubs"</li>
+                    <li>Package features : Pour le Feature Engineering</li>
+                    <li>Package modelling : Pour la construction des modèles
+                    <li>Package tools : Pour les métriques</li>
+                    <li>TODOs à compléter dans DecisionTreeClassification</li>
+                </p>
+                <p>
+                    <span class="bold">Sur le notebook Spark (si IDE ne fonctionne pas):</span>
+                    <li>Dans la console, aller dans le dossier notebook</li>
+                    <li>Tapez "./bin/spark-notebook"</li>
+                    <li>Dans votre web browser, allez dans "localhost:9000"</li>
+                    <li>Aller dans "hands-on-mix-it-2015/2-DecisionTree"</li>
+                    <li>Lancer le notebook DecisionTreeClassificationStubs et complétez les TODOs</li>
+                </p>
+            </section>
+            <section>
                 <h4>Solution: Main</h4>
                 <pre class="scala"><code class="hljs">
 // Loading data
@@ -1050,6 +1087,25 @@ println(s"\t Confusion Matrix: \n $confusionTest")
                 <h2>Implémentation 1</h2>
             </section>
             <section>
+                <h4>Organisation du projet</h4>
+                <p>
+                    <span class="bold">Sur l'IDE (solution à prioriser):</span>
+                    <li>Travail à réaliser dans "main.com.xebia.spark.randomForestClassification.stubs"</li>
+                    <li>Package features : Pour le Feature Engineering</li>
+                    <li>Package modelling : Pour la construction des modèles
+                    <li>Package tools : Pour les métriques</li>
+                    <li>TODOs à compléter dans RandomForestClassification</li>
+                </p>
+                <p>
+                    <span class="bold">Sur le notebook Spark (si IDE ne fonctionne pas):</span>
+                    <li>Dans la console, aller dans le dossier notebook</li>
+                    <li>Tapez "./bin/spark-notebook"</li>
+                    <li>Dans votre web browser, allez dans "localhost:9000"</li>
+                    <li>Aller dans "hands-on-mix-it-2015/3-RandomForest"</li>
+                    <li>Lancer le notebook RandomForestClassificationStubs et complétez les TODOs</li>
+                </p>
+            </section>
+            <section>
                 <h4>Solution: Main</h4>
                 <pre class="scala"><code class="hljs">
 // Loading data
@@ -1088,6 +1144,45 @@ println(s"\t Confusion Matrix: \n $confusionTest")
             </section>
             <section>
                 <h2>Implémentation 2</h2>
+            </section>
+            <section id="grid_search">
+                <h4>Grid Search</h4>
+                <p class="offset-left">
+                    <p>
+                        <span class="bold">Objectif</span> : Tester, pour chaque paramètre, plusieurs possibilités
+                    </p>
+                    <p>
+                        <span class="bold">Réalisation :</span>
+                        <li>
+                            Pour chaque combinaison de paramètres, construire un modèle basé sur le train set
+                        </li>
+                        <li>
+                            Calculer le score de prédiction de chaque modèle sur le validation set
+                        </li>
+                        <li>
+                            Sélectionner le jeu de paramètres ayant donné le meilleur score
+                        </li>
+                    </p>
+                </p>
+            </section>
+            <section>
+                <h4>Organisation du projet</h4>
+                <p>
+                    <span class="bold">Sur l'IDE (solution à prioriser):</span>
+                    <li>Travail à réaliser dans "main.com.xebia.spark.randomForestClassification.stubs"</li>
+                    <li>Package features : Pour le Feature Engineering</li>
+                    <li>Package modelling : Pour la construction des modèles
+                    <li>Package tools : Pour les métriques</li>
+                    <li>TODOs à compléter dans RandomForestClassificationGrid</li>
+                </p>
+                <p>
+                    <span class="bold">Sur le notebook Spark (si IDE ne fonctionne pas):</span>
+                    <li>Dans la console, aller dans le dossier notebook</li>
+                    <li>Tapez "./bin/spark-notebook"</li>
+                    <li>Dans votre web browser, allez dans "localhost:9000"</li>
+                    <li>Aller dans "hands-on-mix-it-2015/4-RandomForestGrid"</li>
+                    <li>Lancer le notebook RandomForestClassificationGridStubs et complétez les TODOs</li>
+                </p>
             </section>
             <section>
                 <h4>Solution: Grid Search</h4>
