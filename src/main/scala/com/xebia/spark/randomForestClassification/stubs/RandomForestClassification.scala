@@ -35,7 +35,7 @@ object RandomForestClassification {
     // TODO : use the randomForestTrainClassifier method to train a Random Forest (Use the parameters of your choice)
 
     // Prediction & Evaluation
-    // TODO : get the accuracy and confusion matrix for the prediction on the test set using the getMetricsDecisionTree method
+    // TODO : get the accuracy and confusion matrix for the prediction on the test set using the getMetricsRandomForest method
     // TODO : do the same for the train set for comparison
 
     // Print results

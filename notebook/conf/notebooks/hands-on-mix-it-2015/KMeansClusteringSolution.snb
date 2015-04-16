@@ -34,11 +34,11 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@36556e80\n"
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@289aa07f\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "org.apache.spark.SparkContext@36556e80"
+        "text/html" : "org.apache.spark.SparkContext@289aa07f"
       },
       "output_type" : "execute_result",
       "execution_count" : 2
@@ -217,7 +217,7 @@
         "text/html" : "MapPartitionsRDD[3] at map at &lt;console&gt;:42"
       },
       "output_type" : "execute_result",
-      "execution_count" : 9
+      "execution_count" : 10
     } ]
   }, {
     "metadata" : { },
@@ -241,7 +241,7 @@
         "text/html" : "MapPartitionsRDD[4] at map at &lt;console&gt;:54"
       },
       "output_type" : "execute_result",
-      "execution_count" : 10
+      "execution_count" : 11
     } ]
   }, {
     "metadata" : { },
@@ -258,14 +258,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "model: org.apache.spark.mllib.clustering.KMeansModel = org.apache.spark.mllib.clustering.KMeansModel@66ddf8ba\n"
+      "text" : "model: org.apache.spark.mllib.clustering.KMeansModel = org.apache.spark.mllib.clustering.KMeansModel@630b9b36\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "org.apache.spark.mllib.clustering.KMeansModel@66ddf8ba"
+        "text/html" : "org.apache.spark.mllib.clustering.KMeansModel@630b9b36"
       },
       "output_type" : "execute_result",
-      "execution_count" : 11
+      "execution_count" : 12
     } ]
   }, {
     "metadata" : { },
@@ -282,14 +282,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "([1.0,41.0,0.0,0.5,512.3292],1.0)\n([1.0,35.5304238095238,0.6984126984126984,0.873015873015873,195.38710317460314],0.6825396825396826)\n([2.5499524262607043,28.148192197906756,0.38154138915318747,0.3082778306374881,14.937745004757385],0.3235014272121789)\n([1.3455497382198953,34.7303664921466,1.0890052356020943,0.6439790575916231,70.71551099476441],0.5916230366492147)\nstatsPerCluster: org.apache.spark.rdd.RDD[(org.apache.spark.mllib.linalg.Vector, Double)] = MapPartitionsRDD[52] at map at <console>:55\n"
+      "text" : "([1.0,36.96052631578947,0.8157894736842105,1.0789473684210527,230.11173684210522],0.6578947368421053)\n([2.545625587958608,28.07972718720602,0.4063969896519285,0.3217309501411101,15.289247412982128],0.3198494825964252)\n([1.0,41.0,0.0,0.5,512.3292],1.0)\n([1.2549019607843137,35.305964215686274,0.9313725490196079,0.5833333333333334,80.97502009803918],0.6421568627450981)\nstatsPerCluster: org.apache.spark.rdd.RDD[(org.apache.spark.mllib.linalg.Vector, Double)] = MapPartitionsRDD[52] at map at <console>:55\n"
     }, {
       "metadata" : { },
       "data" : {
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 12
+      "execution_count" : 13
     } ]
   }, {
     "metadata" : {

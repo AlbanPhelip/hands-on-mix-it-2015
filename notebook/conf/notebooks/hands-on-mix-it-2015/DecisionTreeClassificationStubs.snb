@@ -1,0 +1,306 @@
+{
+  "metadata" : {
+    "name" : "DecisionTreeClassificationStubs",
+    "user_save_timestamp" : "1970-01-01T01:00:00.000Z",
+    "auto_save_timestamp" : "1970-01-01T01:00:00.000Z",
+    "language_info" : {
+      "name" : "scala",
+      "file_extension" : "scala",
+      "codemirror_mode" : "text/x-scala"
+    },
+    "trusted" : true,
+    "customLocalRepo" : null,
+    "customRepos" : null,
+    "customDeps" : null,
+    "customImports" : null,
+    "customSparkConf" : null
+  },
+  "cells" : [ {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "# Decision Tree Classification"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###By default a SparkContext is available in the variable ***sparkContext***. We put it in a variable named ***sc*** for more simplicity"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "val sc = sparkContext",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@532f8d91\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "org.apache.spark.SparkContext@532f8d91"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 2
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###We import all the libraries we will need in this notebook"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "import org.apache.spark.rdd.RDD\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.linalg.Matrix\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.tree.DecisionTree\nimport org.apache.spark.mllib.tree.model.DecisionTreeModel\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "import org.apache.spark.rdd.RDD\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.linalg.Matrix\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.tree.DecisionTree\nimport org.apache.spark.mllib.tree.model.DecisionTreeModel\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 11
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###We declare several functions that will be used just after"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The featureEngineering function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "def featureEngineering(data : RDD[String]): RDD[LabeledPoint] = {\n\n  data.map(line => {\n\n    val values = line.replaceAll(\"\\\"\",\"\").split('$')\n\n    val label = values(1).toDouble\n\n    val pClass = values(0).toDouble\n    val sex = values(3) match {\n      case \"male\" => 0d\n      case \"female\" => 1d\n    }\n    val age = values(4) match {\n      case \"NA\" => 28d\n      case l => l.toDouble\n    }\n    val sibsp = values(5).toDouble\n    val parch = values(6).toDouble\n    val fair = values(8) match {\n      case \"NA\" => 14.45\n      case l => l.toDouble\n    }\n    val embarked = values(10) match {\n      case \"\" => 0d\n      case \"C\" => 1d\n      case \"Q\" => 2d\n      case \"S\" => 3d\n    }\n\n    val cleanedData = Array(pClass, sex, age, sibsp, parch, fair, embarked)\n\n    LabeledPoint(label, Vectors.dense(cleanedData))\n  })\n\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "featureEngineering: (data: org.apache.spark.rdd.RDD[String])org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint]\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 52
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The extract header function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n * Extract header of a dataset\n * @param rdd A RDD with a header inside\n * @return A tuple2. First element of the tuple is the header. Second element is the data.\n */\ndef extractHeader(rdd: RDD[String]): (String, RDD[String]) = {\n\n  // Take the first line (csv schema)\n  val schema = rdd.first()\n\n  // Remove first line from first partition only\n  (schema, rdd.mapPartitionsWithIndex {\n    case (0, l) => l.drop(1)\n    case (_, l) => l\n  })\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "extractHeader: (rdd: org.apache.spark.rdd.RDD[String])(String, org.apache.spark.rdd.RDD[String])\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 8
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The getMetricsDecisionTree function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n *\n * @param model A DecisionTreeModel from the method DecisionTree.trainClassifier()\n * @param data the data (a RDD[LabeledPoint])\n * @return A tuple giving the accuracy and the confusion matrix\n */\ndef getMetricsDecisionTree(model: DecisionTreeModel, data: RDD[LabeledPoint]): (Double, Matrix) = {\n\n  val predictionsAndLabels = data.map(l => (model.predict(l.features), l.label))\n\n  val metrics: MulticlassMetrics = new MulticlassMetrics(predictionsAndLabels)\n\n  val accuracy = 100d * metrics.precision\n  val confusion = metrics.confusionMatrix\n\n  (accuracy, confusion)\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "getMetricsDecisionTree: (model: org.apache.spark.mllib.tree.model.DecisionTreeModel, data: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint])(Double, org.apache.spark.mllib.linalg.Matrix)\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 9
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The decisionTreeTrainClassifier function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n * Train a Decision Tree Classifier\n * @param data: RDD[LabeledPoint] - The training set\n * @param categoricalFeaturesInfo: A Map indicating which features are categorical and how many categories they contain\n * @param impurity: The impurity measure to select the best feature for splitting (\"entropy\" or \"gini\")\n * @param maxDepth: The maximum depth of each tree\n * @param maxBins: The maximum number of leaves for each tree\n * @return A DecisionTreeClassifier Model, usable to predict new data\n */\ndef decisionTreeTrainClassifier(categoricalFeaturesInfo: Map[Int, Int] = Map[Int, Int](),\n                                impurity: String = \"entropy\",\n                                maxDepth: Int = 2,\n                                maxBins: Int = 12)(data: RDD[LabeledPoint]) : DecisionTreeModel = {\n  DecisionTree.trainClassifier(data, 2, categoricalFeaturesInfo, impurity, maxDepth, maxBins)\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "decisionTreeTrainClassifier: (categoricalFeaturesInfo: Map[Int,Int], impurity: String, maxDepth: Int, maxBins: Int)(data: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint])org.apache.spark.mllib.tree.model.DecisionTreeModel\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 10
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###Your turn now ! Just follow the instructions"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Loading data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : read file ./data/data_titanic.csv",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Parsing Data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use extracHeader method to get an RDD without header",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Feature Engineering"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use the featureEngineering method to get the cleaned data.\n// Be carefull, you will get a RDD[LabeledPoint]",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Splitting Data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : split the cleaned data in a train and test set (proportions 0.75, 0.25) using the 'randomSplit' method",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Modelling"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#####Tuning Parameters"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "val categoricalFeaturesInfo = Map(1 -> 2, 6 -> 4)",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "categoricalFeaturesInfo: scala.collection.immutable.Map[Int,Int] = Map(1 -> 2, 6 -> 4)\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "<div class=\"container-fluid\"><div><div class=\"col-md-12\"><div>\n    <script data-this=\"{&quot;dataId&quot;:&quot;anonee6087846e102d56e2ae6c8e57b9822e&quot;,&quot;dataInit&quot;:[{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:1,&quot;values&quot;:&quot;List(1, 2)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:2,&quot;Key&quot;:&quot;Key&quot;},{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:6,&quot;values&quot;:&quot;List(6, 4)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:4,&quot;Key&quot;:&quot;Key&quot;}],&quot;genId&quot;:&quot;2054606868&quot;}\" type=\"text/x-scoped-javascript\">/*<![CDATA[*/req(['../javascripts/notebook/playground','../javascripts/notebook/magic/tableChart'], \n      function(playground, _magictableChart) {\n        // data ==> data-this (in observable.js's scopedEval) ==> this in JS => { dataId, dataInit, ... }\n        // this ==> scope (in observable.js's scopedEval) ==> this.parentElement ==> div.container below (toHtml)\n\n        playground.call(data,\n                        this\n                        ,\n                        {\n    \"f\": _magictableChart,\n    \"o\": {\"headers\":[\"key\",\"value\",\"Key\",\"Value\",\"headers\",\"values\"],\"nrow\":2,\"shown\":25,\"width\":600,\"height\":400}\n  }\n  \n                        \n                        \n                      );\n      }\n    );/*]]>*/</script></div></div></div></div>"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 57
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#####Training the model"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use the decisionTreeTrainClassifier method to train a Decision Tree (Use the parameters of your choice)",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "model: org.apache.spark.mllib.tree.model.DecisionTreeModel = DecisionTreeModel classifier of depth 10 with 223 nodes\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "DecisionTreeModel classifier of depth 10 with 223 nodes"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 58
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Prediction and Evaluation"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : get the accuracy and confusion matrix for the prediction on the test set using the getMetricsDecisionTree method\n// TODO : do the same for the train set for comparison",
+    "outputs" : [ ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Print the results"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "",
+    "outputs" : [ ]
+  } ],
+  "nbformat" : 4
+}

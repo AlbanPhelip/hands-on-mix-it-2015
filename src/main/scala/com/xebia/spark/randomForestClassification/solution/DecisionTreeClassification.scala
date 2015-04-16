@@ -21,10 +21,10 @@ object DecisionTreeClassification {
     val data = extractHeader(rawData)._2
 
     // Feature Engineering
-    val cleanedData = Engineering.featureEngineering(data)
+    val cleanData = Engineering.featureEngineering(data)
 
     // Splitting data
-    val Array(trainSet, testSet) = cleanedData.randomSplit(Array(0.75, 0.25), seed=1234)
+    val Array(trainSet, testSet) = cleanData.randomSplit(Array(0.75, 0.25))
 
     // Modelling
     // -------- Tuning parameters

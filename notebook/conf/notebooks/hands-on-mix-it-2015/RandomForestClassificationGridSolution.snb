@@ -1,0 +1,396 @@
+{
+  "metadata" : {
+    "name" : "RandomForestClassificationGridSolution",
+    "user_save_timestamp" : "1970-01-01T01:00:00.000Z",
+    "auto_save_timestamp" : "1970-01-01T01:00:00.000Z",
+    "language_info" : {
+      "name" : "scala",
+      "file_extension" : "scala",
+      "codemirror_mode" : "text/x-scala"
+    },
+    "trusted" : true,
+    "customLocalRepo" : null,
+    "customRepos" : null,
+    "customDeps" : null,
+    "customImports" : null,
+    "customSparkConf" : null
+  },
+  "cells" : [ {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "# Random Forest Classification"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###By default a SparkContext is available in the variable ***sparkContext***. We put it in a variable named ***sc*** for more simplicity"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "val sc = sparkContext",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@34966dc\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "org.apache.spark.SparkContext@34966dc"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 2
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###We import all the libraries we will need in this notebook"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "import org.apache.spark.rdd.RDD\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.linalg.Matrix\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.tree.RandomForest\nimport org.apache.spark.mllib.tree.model.RandomForestModel\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "import org.apache.spark.rdd.RDD\nimport org.apache.spark.mllib.linalg.Vectors\nimport org.apache.spark.mllib.linalg.Matrix\nimport org.apache.spark.mllib.regression.LabeledPoint\nimport org.apache.spark.mllib.tree.RandomForest\nimport org.apache.spark.mllib.tree.model.RandomForestModel\nimport org.apache.spark.mllib.evaluation.MulticlassMetrics\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 3
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###We declare several functions that will be used just after"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The featureEngineering function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "def featureEngineering(data : RDD[String]): RDD[LabeledPoint] = {\n\n  data.map(line => {\n\n    val values = line.replaceAll(\"\\\"\",\"\").split('$')\n\n    val label = values(1).toDouble\n\n    val pClass = values(0).toDouble\n    val sex = values(3) match {\n      case \"male\" => 0d\n      case \"female\" => 1d\n    }\n    val age = values(4) match {\n      case \"NA\" => 28d\n      case l => l.toDouble\n    }\n    val sibsp = values(5).toDouble\n    val parch = values(6).toDouble\n    val fair = values(8) match {\n      case \"NA\" => 14.45\n      case l => l.toDouble\n    }\n    val embarked = values(10) match {\n      case \"\" => 0d\n      case \"C\" => 1d\n      case \"Q\" => 2d\n      case \"S\" => 3d\n    }\n\n    val cleanedData = Array(pClass, sex, age, sibsp, parch, fair, embarked)\n\n    LabeledPoint(label, Vectors.dense(cleanedData))\n  })\n\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "featureEngineering: (data: org.apache.spark.rdd.RDD[String])org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint]\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 4
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The extract header function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n * Extract header of a dataset\n * @param rdd A RDD with a header inside\n * @return A tuple2. First element of the tuple is the header. Second element is the data.\n */\ndef extractHeader(rdd: RDD[String]): (String, RDD[String]) = {\n\n  // Take the first line (csv schema)\n  val schema = rdd.first()\n\n  // Remove first line from first partition only\n  (schema, rdd.mapPartitionsWithIndex {\n    case (0, l) => l.drop(1)\n    case (_, l) => l\n  })\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "extractHeader: (rdd: org.apache.spark.rdd.RDD[String])(String, org.apache.spark.rdd.RDD[String])\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 5
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The getMetricsRandomForest function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n *\n * @param model A RandomForestModel from the method RandomForest.trainClassifier()\n * @param data the data (a RDD[LabeledPoint])\n * @return A tuple giving the accuracy and the confusion matrix\n */\ndef getMetricsRandomForest(model: RandomForestModel, data: RDD[LabeledPoint]): (Double, Matrix) = {\n\n  val predictionsAndLabels = data.map(l => (model.predict(l.features), l.label))\n\n  val metrics: MulticlassMetrics = new MulticlassMetrics(predictionsAndLabels)\n\n  val accuracy = 100d * metrics.precision\n  val confusion = metrics.confusionMatrix\n\n  (accuracy, confusion)\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "getMetricsRandomForest: (model: org.apache.spark.mllib.tree.model.RandomForestModel, data: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint])(Double, org.apache.spark.mllib.linalg.Matrix)\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 6
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####The randomForestTrainClassifier function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "/**\n * Train a Random Forest Classifier\n * @param data: RDD[LabeledPoint] - The training set\n * @param categoricalFeaturesInfo: A Map indicating which features are categorical and how many categories they contain\n * @param numTrees: The number of trees to train\n * @param featuresSubsetStrategy: Strategy to select a subset of the features for splitting (use \"auto\")\n * @param impurity: The impurity measure to select the best feature for splitting (\"entropy\" or \"gini\")\n * @param maxDepth: The maximum depth of each tree\n * @param maxBins: The maximum number of leaves for each tree\n * @return A RandomForestClassifier Model, usable to predict new data\n */\ndef randomForestTrainClassifier(categoricalFeaturesInfo: Map[Int, Int] = Map[Int, Int](),\n                               numTrees: Int = 10,\n                               featuresSubsetStrategy: String = \"auto\",\n                               impurity: String = \"entropy\",\n                               maxDepth: Int = 2,\n                               maxBins: Int = 12)(data: RDD[LabeledPoint]) : RandomForestModel = {\n  RandomForest.trainClassifier(data, 2, categoricalFeaturesInfo, numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "randomForestTrainClassifier: (categoricalFeaturesInfo: Map[Int,Int], numTrees: Int, featuresSubsetStrategy: String, impurity: String, maxDepth: Int, maxBins: Int)(data: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint])org.apache.spark.mllib.tree.model.RandomForestModel\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 7
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "###Your turn now ! Just follow the instructions"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Loading data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : read file ./data/data_titanic.csv\nval rawData = sc.textFile(\"./data/data_titanic.csv\")",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "rawData: org.apache.spark.rdd.RDD[String] = ./data/data_titanic.csv MapPartitionsRDD[1] at textFile at <console>:44\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "./data/data_titanic.csv MapPartitionsRDD[1] at textFile at &lt;console&gt;:44"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 8
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Parsing Data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use extracHeader method to get an RDD without header\nval data = extractHeader(rawData)._2",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "data: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[2] at mapPartitionsWithIndex at <console>:52\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "MapPartitionsRDD[2] at mapPartitionsWithIndex at &lt;console&gt;:52"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 9
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Feature Engineering"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use the featureEngineering method to get the cleaned data.\n// Be carefull, you will get a RDD[LabeledPoint]\nval cleanData = featureEngineering(data)",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "cleanData: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = MapPartitionsRDD[3] at map at <console>:43\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "MapPartitionsRDD[3] at map at &lt;console&gt;:43"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 10
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Splitting Data"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : split the cleaned data in a train, validation and test set (proportions 0.70, 0.15, 0.15) using the 'randomSplit' method\nval Array(trainSet, valSet, testSet) = cleanData.randomSplit(Array(0.7, 0.15, 0.15))",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "trainSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = PartitionwiseSampledRDD[7] at randomSplit at <console>:60\nvalSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = PartitionwiseSampledRDD[8] at randomSplit at <console>:60\ntestSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = PartitionwiseSampledRDD[9] at randomSplit at <console>:60\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "PartitionwiseSampledRDD[9] at randomSplit at &lt;console&gt;:60"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 13
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Modelling"
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#####Implement gridSearch function"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : complete the gridSearchRandomForestClassifier method\n/**\n * Perform a Grid Search to find the best parameters for the Random Forest\n * @param trainSet: RDD[LabeledPoint] - The training set\n * @param valSet: RDD[LabeledPoint] - The validation set\n * @param categoricalFeaturesInfo: A Map indicating which features are categorical and how many categories they contain\n * @param numTreesGrid: The number of trees to train\n * @param featuresSubsetStrategy: Strategy to select a subset of the features for splitting (use \"auto\")\n * @param impurityGrid: The impurity measure to select the best feature for splitting (\"entropy\" or \"gini\")\n * @param maxDepthGrid: The maximum depth of each tree\n * @param maxBinsGrid: The maximum number of leaves for each tree\n * @return The best parameters found, in a tuple.\n */\ndef gridSearchRandomForestClassifier(trainSet: RDD[LabeledPoint],\n                                     valSet: RDD[LabeledPoint],\n                                     categoricalFeaturesInfo: Map[Int, Int] = Map[Int, Int](),\n                                     numTreesGrid: Array[Int] = Array(10),\n                                     featuresSubsetStrategy: String = \"auto\",\n                                     impurityGrid: Array[String] = Array(\"entropy\"),\n                                     maxDepthGrid: Array[Int] = Array(2),\n                                     maxBinsGrid: Array[Int] = Array(4)) = {\n\n  val gridSearch =\n\n    for (numTrees <- numTreesGrid;\n         impurity <- impurityGrid;\n         maxDepth <- maxDepthGrid;\n         maxBins <- maxBinsGrid)\n      yield {\n\n        // TODO : Train a randomForestTrainClassifier on the train set with the selected parameters\n        val model = randomForestTrainClassifier(categoricalFeaturesInfo,\n          numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)(trainSet)\n\n        // TODO : Get the accuracy from getMetricsRandomForest for prediction on the validation set\n        val accuracyVal = getMetricsRandomForest(model, valSet)._1\n\n        // TODO : Create a tuple in the following format :\n        ((numTrees, impurity, maxDepth, maxBins), accuracyVal)\n      }\n\n  // TODO : Uncomment the following lines to select the parameters returning the best results\n  val params = gridSearch.sortBy(_._2).reverse(0)._1\n  val numTrees = params._1\n  val impurity = params._2\n  val maxDepth = params._3\n  val maxBins = params._4\n\n  (categoricalFeaturesInfo, numTrees, featuresSubsetStrategy, impurity, maxDepth, maxBins)\n}",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "gridSearchRandomForestClassifier: (trainSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint], valSet: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint], categoricalFeaturesInfo: Map[Int,Int], numTreesGrid: Array[Int], featuresSubsetStrategy: String, impurityGrid: Array[String], maxDepthGrid: Array[Int], maxBinsGrid: Array[Int])(Map[Int,Int], Int, String, String, Int, Int)\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 14
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#####Tuning Parameters"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "val categoricalFeaturesInfo = Map(1 -> 2, 6 -> 4)\n// TODO : use the gridSearchRandomForestClassifier method to test several parameters of your choice (Use the train and validation sets)\nval bestParams = gridSearchRandomForestClassifier(trainSet, valSet, categoricalFeaturesInfo = categoricalFeaturesInfo, \n                                                  numTreesGrid = Array(10, 20), impurityGrid = Array(\"entropy\", \"gini\"), \n                                                  maxDepthGrid = Array(5, 10), maxBinsGrid = Array(30, 50))",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "categoricalFeaturesInfo: scala.collection.immutable.Map[Int,Int] = Map(1 -> 2, 6 -> 4)\nbestParams: (Map[Int,Int], Int, String, String, Int, Int) = (Map(1 -> 2, 6 -> 4),20,auto,entropy,10,50)\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "(Map(1 -&gt; 2, 6 -&gt; 4),20,auto,entropy,10,50)"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 15
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "#####Training the model"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : use the decisionTreeTrainClassifier method to train a Random Forest (Use the parameters of your choice)\nval dataTrain = sc.union(trainSet, valSet)\nval model = (randomForestTrainClassifier _).tupled(bestParams)(dataTrain)",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "dataTrain: org.apache.spark.rdd.RDD[org.apache.spark.mllib.regression.LabeledPoint] = UnionRDD[578] at union at <console>:58\nmodel: org.apache.spark.mllib.tree.model.RandomForestModel = \nTreeEnsembleModel classifier with 20 trees\n\n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "TreeEnsembleModel classifier with 20 trees\n"
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 16
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Prediction and Evaluation"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "// TODO : get the accuracy and confusion matrix for the prediction on the test set using the getMetricsRandomForest method\n// TODO : do the same for the train set for comparison\nval (accuracyTrain, confusionTrain) = getMetricsRandomForest(model, trainSet)\nval (accuracyTest, confusionTest) = getMetricsRandomForest(model, testSet)",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "accuracyTrain: Double = 88.4828349944629\nconfusionTrain: org.apache.spark.mllib.linalg.Matrix = \n529.0  26.0   \n78.0   270.0  \naccuracyTest: Double = 82.25806451612904\nconfusionTest: org.apache.spark.mllib.linalg.Matrix = \n116.0  7.0   \n26.0   37.0  \n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : "116.0  7.0   \n26.0   37.0  "
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 17
+    } ]
+  }, {
+    "metadata" : { },
+    "cell_type" : "markdown",
+    "source" : "####Print the results"
+  }, {
+    "metadata" : {
+      "trusted" : true,
+      "input_collapsed" : false,
+      "collapsed" : false
+    },
+    "cell_type" : "code",
+    "source" : "println(s\"Results for the training set\")\nprintln(s\"\\t Accuracy: $accuracyTrain %\")\nprintln(s\"\\t Confusion Matrix: \\n $confusionTrain\")\n\nprintln(s\"Results for the test set\")\nprintln(s\"\\t Accuracy: $accuracyTest %\")\nprintln(s\"\\t Confusion Matrix: \\n $confusionTest\")",
+    "outputs" : [ {
+      "name" : "stdout",
+      "output_type" : "stream",
+      "text" : "Results for the training set\n\t Accuracy: 88.4828349944629 %\n\t Confusion Matrix: \n 529.0  26.0   \n78.0   270.0  \nResults for the test set\n\t Accuracy: 82.25806451612904 %\n\t Confusion Matrix: \n 116.0  7.0   \n26.0   37.0  \n"
+    }, {
+      "metadata" : { },
+      "data" : {
+        "text/html" : ""
+      },
+      "output_type" : "execute_result",
+      "execution_count" : 18
+    } ]
+  } ],
+  "nbformat" : 4
+}
