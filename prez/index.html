@@ -189,6 +189,14 @@
             </ol>
         </section>
         <section>
+<<<<<<< Updated upstream
+=======
+            <h3>A l'utilisation, comment ça se passe ?</h3>
+            Le Machine Learning c'est comme la crypto
+            <p>Utilisez des implémentations éprouvées.</p>
+        </section>
+        <section>
+>>>>>>> Stashed changes
             <h2 class="alone">Spark & MLlib</h2>
             <aside class="notes">
                 <!-- Put our comments her -->
@@ -543,6 +551,20 @@ val neg = LabeledPoint(0.0, Vectors.sparse(3, Array(0, 2), Array(1.0, 3.0)))
             </section>
             <section>
                 <h2>Implémentation</h2>
+            </section>
+            <section>
+                <h4>Le dataset : Titanic</h4>
+                <p>
+                    <span class="bold">Objectif:</span> Prédire qui va survivre ou non au sein du Titanic
+                </p>
+                <p>
+                    Données à disposition pour chaque passager : 
+                    <li>La classe</li>
+                    <li>Le sexe</li>
+                    <li>L'âge</li>
+                    <li>Le prix du billet</li>
+                    <li>La classe d'embarquement</li>
+                </p>
             </section>
             <section>
                 <h4>Organisation du projet</h4>
@@ -974,7 +996,7 @@ println(s"Error: $accuracy")
                 <p>
                     <li>categoricalFeaturesInfo : Mapping donnant la position et le nombre de classes des variables catégorielles (ex: Map(1 -> 2, 6 -> 4))</li>
                     <li>maxDepth : Profondeur max de chaque arbre</li>
-                    <li>maxBins : Nombre maxomal de feuilles dans chaque arbre</li>
+                    <li>maxBins : Nombre maximal de feuilles dans chaque arbre</li>
                     <li>impurity : Critère de sélection de la meilleure caractéristique ("entropy" ou "gini")</li>
                 </p>
             </section>
@@ -1066,7 +1088,7 @@ println(s"\t Confusion Matrix: \n $confusionTest")
                     <li>categoricalFeaturesInfo : Mapping donnant la position et le nombre de classes des variables catégorielles</li>
                     <li><span class="bold">numTrees</span> : Nombre d'arbres à construire</li>
                     <li>maxDepth : Profondeur max de chaque arbre</li>
-                    <li>maxBins : Nombre maxomal de feuilles dans chaque arbre</li>
+                    <li>maxBins : Nombre maximal de feuilles dans chaque arbre</li>
                     <li>impurity : Critère de sélection de la meilleure caractéristique ("entropy" ou "gini")</li>
                     <li><span class="bold">featuresSubsetStrategy</span> : Nombre de caractéristiques à prendre en compte à chaque split ("auto")</li>
                 </p>
