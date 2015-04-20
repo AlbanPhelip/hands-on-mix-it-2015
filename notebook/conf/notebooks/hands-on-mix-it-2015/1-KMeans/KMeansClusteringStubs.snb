@@ -82,7 +82,7 @@
       "collapsed" : false
     },
     "cell_type" : "code",
-    "source" : "def featureEngineering(data : RDD[String]): RDD[LabeledPoint] = {\n  data.map(line => {\n\n    val values = line.split('$')\n    val label = values(1).toDouble\n\n    val pClass = values(0).toDouble\n\n    val age = values(4) match {\n      case \"NA\" => 28d\n      case l => l.toDouble\n    }\n    val sibsp = values(5).toDouble\n    val parch = values(6).toDouble\n    val fair = values(8) match {\n      case \"NA\" => 14.45\n      case l => l.toDouble\n    }\n\n    val numericalData = Array(pClass, age, sibsp, parch, fair)\n\n    LabeledPoint(label, Vectors.dense(numericalData))\n  })\n}",
+    "source" : "def featureEngineering(data : RDD[String]): RDD[LabeledPoint] = {\n  data.map(line => {\n\n    val values = line.replaceAll(\"\\\"\").split('$')\n    val label = values(1).toDouble\n\n    val pClass = values(0).toDouble\n\n    val age = values(4) match {\n      case \"NA\" => 28d\n      case l => l.toDouble\n    }\n    val sibsp = values(5).toDouble\n    val parch = values(6).toDouble\n    val fair = values(8) match {\n      case \"NA\" => 14.45\n      case l => l.toDouble\n    }\n\n    val numericalData = Array(pClass, age, sibsp, parch, fair)\n\n    LabeledPoint(label, Vectors.dense(numericalData))\n  })\n}",
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
