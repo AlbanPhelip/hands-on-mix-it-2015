@@ -1,3 +1,3 @@
-Présentation de TypeScript
+Présentation du Hand's on
 ================
 
