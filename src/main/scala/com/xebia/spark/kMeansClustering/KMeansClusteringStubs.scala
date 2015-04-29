@@ -20,7 +20,7 @@ object KMeansClusteringStubs {
      // Be carefull, you will get a RDD[LabeledPoint]
 
      // Get the features
-     // TODO : get the data we want to analyse (RDD[Vector])
+     // TODO : get the data we want to analyse (RDD[Vector]) use the .features method of LabeledPoint
 
      // Modelling
      // TODO : Train a KMeans model on the data set

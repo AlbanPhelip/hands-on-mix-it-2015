@@ -197,7 +197,7 @@
       "collapsed" : true
     },
     "cell_type" : "code",
-    "source" : "// TODO : get the data we want to analyse (RDD[Vector])",
+    "source" : "// TODO : get the data we want to analyse (RDD[Vector]) use the .features method of LabeledPoint",
     "outputs" : [ ]
   }, {
     "metadata" : { },
