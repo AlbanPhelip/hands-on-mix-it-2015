@@ -469,26 +469,26 @@ val pos = LabeledPoint(1.0, Vectors.dense(1.0, 0.0, 3.0))
 val neg = LabeledPoint(0.0, Vectors.sparse(3, Array(0, 2), Array(1.0, 3.0)))
             </code></pre>
         </section>
-        <section id="data_science_pipeline">
+        <section>
             <h3>Démarche globale en Data Science</h3>
             <p class="offset-left">
                 <li>
-                    Step 1 : Chargement des données
+                    Step 1 : Chargement des données -> <span class="bold">sc.textFile()</span>
                 </li>
                 <li>
-                    Step 2 : Feature Engineeging (Nettoyage, création et préparation des features)
+                    Step 2 : Feature Engineeging (Nettoyage, création et préparation des features) -> <span class="bold">RDD[Vectors], RDD[LabeledPoint]</span>
                 </li>
                 <li>
-                    Step 3 : Splitting (train, validation et test sets)
+                    Step 3 : Splitting (train & test sets) -> <span class="bold">randomSplit()</span>
                 </li>
                 <li>
-                    Step 4 : Tuning des paramètres (à la main ou grid search)
+                    Step 4 : Modelling sur train set  -> <span class="bold">model.train</span>
                 </li>
                 <li>
-                    Step 5 : Modelling sur train+validation set
+                    Step 5 : Tuning des paramètres (à la main ou grid search)
                 </li>
                 <li>
-                    Step 6 : Prediction sur le test set
+                    Step 6 : Prediction sur le test set  -> <span class="bold">model.predict</span>
                 </li>
             </p>
         </section>
