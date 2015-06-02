@@ -34,11 +34,11 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@18e647c4\n"
+      "text" : "sc: org.apache.spark.SparkContext = org.apache.spark.SparkContext@226f3a8b\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "org.apache.spark.SparkContext@18e647c4"
+        "text/html" : "org.apache.spark.SparkContext@226f3a8b"
       },
       "output_type" : "execute_result",
       "execution_count" : 2
@@ -290,7 +290,7 @@
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "<div class=\"container-fluid\"><div><div class=\"col-md-12\"><div>\n    <script data-this=\"{&quot;dataId&quot;:&quot;anonf222205b093e8af2f759f02fb837d4bb&quot;,&quot;dataInit&quot;:[{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:1,&quot;values&quot;:&quot;List(1, 2)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:2,&quot;Key&quot;:&quot;Key&quot;},{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:6,&quot;values&quot;:&quot;List(6, 4)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:4,&quot;Key&quot;:&quot;Key&quot;}],&quot;genId&quot;:&quot;417685591&quot;}\" type=\"text/x-scoped-javascript\">/*<![CDATA[*/req(['../javascripts/notebook/playground','../javascripts/notebook/magic/tableChart'], \n      function(playground, _magictableChart) {\n        // data ==> data-this (in observable.js's scopedEval) ==> this in JS => { dataId, dataInit, ... }\n        // this ==> scope (in observable.js's scopedEval) ==> this.parentElement ==> div.container below (toHtml)\n\n        playground.call(data,\n                        this\n                        ,\n                        {\n    \"f\": _magictableChart,\n    \"o\": {\"headers\":[\"key\",\"value\",\"Key\",\"Value\",\"headers\",\"values\"],\"nrow\":2,\"shown\":25,\"width\":600,\"height\":400}\n  }\n  \n                        \n                        \n                      );\n      }\n    );/*]]>*/</script></div></div></div></div>"
+        "text/html" : "<div class=\"container-fluid\"><div><div class=\"col-md-12\"><div>\n    <script data-this=\"{&quot;dataId&quot;:&quot;anon05c886d728f32434bb2a8410ff606084&quot;,&quot;dataInit&quot;:[{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:1,&quot;values&quot;:&quot;List(1, 2)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:2,&quot;Key&quot;:&quot;Key&quot;},{&quot;Value&quot;:&quot;Value&quot;,&quot;key&quot;:6,&quot;values&quot;:&quot;List(6, 4)&quot;,&quot;headers&quot;:&quot;List(Key, Value)&quot;,&quot;value&quot;:4,&quot;Key&quot;:&quot;Key&quot;}],&quot;genId&quot;:&quot;428536425&quot;}\" type=\"text/x-scoped-javascript\">/*<![CDATA[*/req(['../javascripts/notebook/playground','../javascripts/notebook/magic/tableChart'], \n      function(playground, _magictableChart) {\n        // data ==> data-this (in observable.js's scopedEval) ==> this in JS => { dataId, dataInit, ... }\n        // this ==> scope (in observable.js's scopedEval) ==> this.parentElement ==> div.container below (toHtml)\n\n        playground.call(data,\n                        this\n                        ,\n                        {\n    \"f\": _magictableChart,\n    \"o\": {\"headers\":[\"key\",\"value\",\"Key\",\"Value\",\"headers\",\"values\"],\"nrow\":2,\"shown\":25,\"width\":600,\"height\":400}\n  }\n  \n                        \n                        \n                      );\n      }\n    );/*]]>*/</script></div></div></div></div>"
       },
       "output_type" : "execute_result",
       "execution_count" : 12
@@ -310,14 +310,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "model: org.apache.spark.mllib.tree.model.DecisionTreeModel = DecisionTreeModel classifier of depth 10 with 223 nodes\n"
+      "text" : "model: org.apache.spark.mllib.tree.model.DecisionTreeModel = DecisionTreeModel classifier of depth 10 with 211 nodes\n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "DecisionTreeModel classifier of depth 10 with 223 nodes"
+        "text/html" : "DecisionTreeModel classifier of depth 10 with 211 nodes"
       },
       "output_type" : "execute_result",
-      "execution_count" : 58
+      "execution_count" : 13
     } ]
   }, {
     "metadata" : { },
@@ -334,14 +334,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "accuracyTrain: Double = 89.00100908173562\nconfusionTrain: org.apache.spark.mllib.linalg.Matrix = \n586.0  22.0   \n87.0   296.0  \naccuracyTest: Double = 79.87421383647799\nconfusionTest: org.apache.spark.mllib.linalg.Matrix = \n179.0  22.0  \n42.0   75.0  \n"
+      "text" : "accuracyTrain: Double = 89.0909090909091\nconfusionTrain: org.apache.spark.mllib.linalg.Matrix = \n601.0  21.0   \n87.0   281.0  \naccuracyTest: Double = 74.60815047021944\nconfusionTest: org.apache.spark.mllib.linalg.Matrix = \n153.0  34.0  \n47.0   85.0  \n"
     }, {
       "metadata" : { },
       "data" : {
-        "text/html" : "179.0  22.0  \n42.0   75.0  "
+        "text/html" : "153.0  34.0  \n47.0   85.0  "
       },
       "output_type" : "execute_result",
-      "execution_count" : 59
+      "execution_count" : 14
     } ]
   }, {
     "metadata" : { },
@@ -358,14 +358,14 @@
     "outputs" : [ {
       "name" : "stdout",
       "output_type" : "stream",
-      "text" : "Results for the training set\n\t Accuracy: 89.00100908173562 %\n\t Confusion Matrix: \n 586.0  22.0   \n87.0   296.0  \nResults for the test set\n\t Accuracy: 79.87421383647799 %\n\t Confusion Matrix: \n 179.0  22.0  \n42.0   75.0  \n"
+      "text" : "Results for the training set\n\t Accuracy: 89.0909090909091 %\n\t Confusion Matrix: \n 601.0  21.0   \n87.0   281.0  \nResults for the test set\n\t Accuracy: 74.60815047021944 %\n\t Confusion Matrix: \n 153.0  34.0  \n47.0   85.0  \n"
     }, {
       "metadata" : { },
       "data" : {
         "text/html" : ""
       },
       "output_type" : "execute_result",
-      "execution_count" : 60
+      "execution_count" : 15
     } ]
   } ],
   "nbformat" : 4
